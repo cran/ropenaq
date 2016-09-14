@@ -9,51 +9,49 @@ knitr::opts_chunk$set(
 
 ## ---- warning=FALSE, message=FALSE---------------------------------------
 library("ropenaq")
-countriesTable <- aq_countries()
+countries_table <- aq_countries()
 library("knitr")
-kable(countriesTable$results)
-kable(countriesTable$meta)
-kable(countriesTable$timestamp)
+kable(countries_table)
+attr(countries_table, "meta")
+attr(countries_table, "timestamp")
 
 ## ---- cache=FALSE--------------------------------------------------------
-citiesTable <- aq_cities()
-kable(head(citiesTable$results))
+cities_table <- aq_cities()
+kable(head(cities_table))
 
 ## ---- cache=FALSE--------------------------------------------------------
-citiesTableIndia <- aq_cities(country="IN")
-kable(citiesTableIndia$results)
+cities_tableIndia <- aq_cities(country="IN", limit = 10)
+kable(cities_tableIndia)
 
 ## ---- error=TRUE---------------------------------------------------------
 #aq_cities(country="PANEM")
 
 ## ---- cache=FALSE--------------------------------------------------------
-locationsIndia <- aq_locations(country="IN", parameter="pm25")
-kable(locationsIndia$results)
+locations_chennai <- aq_locations(country = "IN", city = "Chennai", parameter = "pm25")
+kable(locations_chennai)
 
 ## ---- cache=FALSE--------------------------------------------------------
-tableResults <- aq_measurements(country="IN", city="Delhi", location="Anand+Vihar", parameter="pm25")
-kable(head(tableResults$results))
-kable(tableResults$timestamp)
-kable(tableResults$meta)
+results_table <- aq_measurements(country = "IN", city = "Delhi", location = "Anand+Vihar", parameter = "pm25")
+kable(head(results_table))
 
 ## ---- cache=FALSE--------------------------------------------------------
 tableLatest <- aq_latest()
-kable(head(tableLatest$results))
+kable(head(tableLatest))
 
 ## ---- cache=FALSE--------------------------------------------------------
 tableLatest <- aq_latest(country="IN", city="Delhi", location="Anand+Vihar")
-kable(head(tableLatest$results))
+kable(head(tableLatest))
 
 ## ------------------------------------------------------------------------
-how_many <- aq_measurements(city = "Delhi",
-                            parameter = "pm25")$meta
+how_many <- attr(aq_measurements(city = "Delhi",
+                            parameter = "pm25"), "meta")
 knitr::kable(how_many)
 how_many$found
 
 ## ---- eval = FALSE-------------------------------------------------------
 #  meas <- NULL
 #  for (page in 1:(ceiling(how_many$found/1000))){
-#    meas <- bind_rows(meas,
+#    meas <- dplyr::bind_rows(meas,
 #                  aq_measurements(city = "Delhi",
 #                                  parameter = "pm25",
 #                                  page = page,

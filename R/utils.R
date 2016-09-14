@@ -12,6 +12,11 @@ buildQuery <- function(country = NULL, city = NULL, location = NULL,
                        parameter = NULL, has_geo = NULL, date_from = NULL,
                        date_to = NULL, value_from = NULL,
                        value_to = NULL, limit = NULL,
+                       latitude = NULL, longitude = NULL,
+                       attribution = NULL,
+                       averaging_period = NULL,
+                       source_name = NULL,
+                       radius = NULL,
                        page = NULL){
   # limit
   if (!is.null(limit)) {
@@ -30,9 +35,9 @@ buildQuery <- function(country = NULL, city = NULL, location = NULL,
                            city = city,
                            page = pagee,
                            limit = 1000)
-      nrows <- nrow(temp$results)
+      nrows <- nrow(temp)
       pagee <- pagee + 1
-      locations <- dplyr::bind_rows(locations, temp$results)
+      locations <- dplyr::bind_rows(locations, temp)
     }
     if (!(location %in% locations$locationURL)) {# nolint
       stop(call. = FALSE, "This location/city/country combination is not available within the platform. See ?locations")# nolint
@@ -52,9 +57,9 @@ buildQuery <- function(country = NULL, city = NULL, location = NULL,
       temp <- aq_cities(country = country,
                         page = pagee,
                         limit = 1000)
-      nrows <- nrow(temp$results)
+      nrows <- nrow(temp)
       pagee <- pagee + 1
-      cities <- dplyr::bind_rows(cities, temp$results)
+      cities <- dplyr::bind_rows(cities, temp)
     }
 
     if (!(city %in% cities$cityURL)) {# nolint
@@ -68,7 +73,7 @@ buildQuery <- function(country = NULL, city = NULL, location = NULL,
   # country
   if (!is.null(country)) {
 
-    if (!(country %in% aq_countries(limit = 1000)$results$code)) {# nolint
+    if (!(country %in% aq_countries(limit = 1000)$code)) {# nolint
       stop(call. = FALSE, "This country is not available within the platform. See ?countries")
     }
   }
@@ -90,9 +95,9 @@ buildQuery <- function(country = NULL, city = NULL, location = NULL,
                            page = pagee,
                            location = location,
                            limit = 1000)
-      nrows <- nrow(temp$results)
+      nrows <- nrow(temp)
       pagee <- pagee + 1
-      locations <- dplyr::bind_rows(locations, temp$results)
+      locations <- dplyr::bind_rows(locations, temp)
     }
     if (apply(locations[, parameter], 2, sum) == 0) {
       stop(call. = FALSE, "This parameter is not available for any location corresponding to your query. See ?locations")# nolint
@@ -153,6 +158,29 @@ buildQuery <- function(country = NULL, city = NULL, location = NULL,
 
   }
 
+  if(!is.null(latitude)|!is.null(longitude)){
+    if(is.null(latitude)|is.null(longitude)){
+      stop(call. = FALSE, "If you input a latitude or longitude, you have to input the other coordinate")
+    }
+    if (!dplyr::between(latitude, -90, 90)){
+      stop(call. = FALSE, "Latitude should be between -90 and 90.")
+    }
+    if (!dplyr::between(longitude, -180, 180)){
+      stop(call. = FALSE, "Longitude should be between -180 and 180.")
+    }
+    coordinates <- paste(latitude, longitude, sep = ",")
+  }else{
+    coordinates <- NULL
+  }
+
+  if(!is.null(radius)){
+    if(is.null(latitude)){
+      stop(call. = FALSE,
+           "Radius has to be used with latitude and longitude.")
+    }
+
+  }
+
   argsList <- list(country = country,
                    city = city,
                    location = location,
@@ -163,10 +191,29 @@ buildQuery <- function(country = NULL, city = NULL, location = NULL,
                    value_from = value_from,
                    value_to = value_to,
                    limit = limit,
+                   coordinates = coordinates,
+                   radius = radius,
                    page = page)
+
+  # argument only for measurements
+  include_fields <- c(attribution,
+                      averaging_period,
+                      source_name)
+  if(any(!is.null(include_fields))){
+
+    fields <-  c("attribution",
+                 "averagingPeriod",
+                 "sourceName")
+    fields <- fields[include_fields]
+    fields <- toString(fields)
+    fields <- gsub(", ", ",", fields)
+    argsList[["include_fields"]] <- fields
+
+  }
 
   return(argsList)
 }
+
 ######################################################################################
 # does the query and then parses it
 getResults <- function(urlAQ, argsList){
@@ -187,16 +234,13 @@ getResults <- function(urlAQ, argsList){
 
   #get the time stamps
   timestamp <- dplyr::tbl_df(data.frame(
-    lastModif = lubridate::dmy_hms(
-      httr::headers(page)$"last-modified",
-      tz = "GMT"),
-    queriedAt = lubridate::dmy_hms(
-      httr::headers(page)$date,
-      tz = "GMT")))
+    lastModif = func_date_headers(httr::headers(page)$"last-modified"),
+    queriedAt = func_date_headers(httr::headers(page)$date)))
 
-  return(list(results = results,
-              meta = meta,
-              timestamp = timestamp))
+  attr(results, "meta") <- meta
+  attr(results, "timestamp") <- timestamp
+
+  return(results)
 }
 
 ######################################################################################
@@ -259,4 +303,23 @@ functionParameters <- function(resTable) {
   resTable$co <-  grepl("co", resTable$parameters)
   resTable$bc <-  grepl("bc", resTable$parameters)
   resTable <- resTable %>% select_(~ - parameters)
+}
+
+
+# dates abbreviation
+func_date_headers <- function(date){
+  date <- strsplit(date, ",")[[1]][2]
+  date <- gsub("Jan", "01", date)
+  date <- gsub("Feb", "02", date)
+  date <- gsub("Mar", "03", date)
+  date <- gsub("Apr", "04", date)
+  date <- gsub("May", "05", date)
+  date <- gsub("Jun", "06", date)
+  date <- gsub("Jul", "07", date)
+  date <- gsub("Aug", "08", date)
+  date <- gsub("Sep", "09", date)
+  date <- gsub("Oct", "10", date)
+  date <- gsub("Nov", "11", date)
+  date <- gsub("Dec", "12", date)
+  lubridate::dmy_hms(date, tz = "GMT")
 }

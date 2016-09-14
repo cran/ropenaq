@@ -13,9 +13,16 @@ library("ropenaq")
 library("dplyr")
 
 ## ---- warning=FALSE, message=FALSE---------------------------------------
-dataGeo <- rbind(ropenaq::aq_locations(limit = 1000, page = 1)$results,
-                 ropenaq::aq_locations(limit = 1000, page = 2)$results,
-                 ropenaq::aq_locations(limit = 1000, page = 3)$results)
+pagee <- 1
+dataGeo <- NULL
+nrows <- 1000
+while(nrows == 1000){
+  temp <- aq_locations(page = pagee,
+                       limit = 1000)
+  nrows <- nrow(temp)
+  pagee <- pagee + 1
+  dataGeo <- dplyr::bind_rows(dataGeo, temp)
+}
 dataGeo <- filter(dataGeo, location != "Test Prueba", location != "PA")
 
 ## ----fig.width=7, fig.height=4, warning=FALSE, message=FALSE-------------

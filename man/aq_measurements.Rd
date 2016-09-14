@@ -6,7 +6,9 @@
 \usage{
 aq_measurements(country = NULL, city = NULL, location = NULL,
   parameter = NULL, has_geo = NULL, date_from = NULL, date_to = NULL,
-  limit = 100, value_from = NULL, value_to = NULL, page = 1)
+  limit = 100, value_from = NULL, latitude = NULL, longitude = NULL,
+  radius = NULL, attribution = FALSE, averaging_period = FALSE,
+  source_name = FALSE, value_to = NULL, page = 1)
 }
 \arguments{
 \item{country}{Limit results by a certain country -- a two-letters code see countries() for finding code based on name.}
@@ -18,7 +20,7 @@ aq_measurements(country = NULL, city = NULL, location = NULL,
 \item{parameter}{Limit to only a certain parameter (valid values are 'pm25', 'pm10', 'so2', 'no2', 'o3', 'co' and 'bc').
 If no parameter is given, all parameters are retrieved.}
 
-\item{has_geo}{Filter out items that have or do not have geographic information.}
+\item{has_geo}{has_geo Filter out items that have or do not have geographic information.}
 
 \item{date_from}{Show results after a certain date. (character year-month-day, ex. '2015-12-20')}
 
@@ -28,12 +30,24 @@ If no parameter is given, all parameters are retrieved.}
 
 \item{value_from}{Show results above value threshold, useful in combination with \code{parameter}.}
 
+\item{latitude}{Latitude of the center point (lat, lon) used to get measurements within a certain area.}
+
+\item{longitude}{Longitude of the center point (lat, lon) used to get measurements within a certain area.}
+
+\item{radius}{Radius (in meters) used to get measurements within a certain area, must be used with latitude and longitude}
+
+\item{attribution}{Logical, whether to add a column with attribution information}
+
+\item{averaging_period}{Logical, whether to add a column with averaging_period information}
+
+\item{source_name}{Logical, whether to add a column with source_name information}
+
 \item{value_to}{Show results below value threshold, useful in combination with \code{parameter}.}
 
 \item{page}{The page of the results to query. This can be useful if e.g. there are 2000 measurements, then first use page=1 and page=2 with limit=100 to get all measurements for your query.}
 }
 \value{
-a list of 3 data.frames, a results data.frame (dplyr "tbl_df") with 12 columns:
+A results data.frame (dplyr "tbl_df") with 12 columns:
 \itemize{
  \item the name of the location ("location"),
  \item the parameter ("parameter")
@@ -47,7 +61,7 @@ a list of 3 data.frames, a results data.frame (dplyr "tbl_df") with 12 columns:
  \item the local POSIXct time ("dateLocal"),
  \item its longitude ("longitude") and latitude if available ("latitude").
 }
-meta data.frame (dplyr "tbl_df") with 1 line and 5 columns:
+and two attributes, a meta data.frame (dplyr "tbl_df") with 1 line and 5 columns:
 \itemize{
 \item the API name ("name"),
 \item the license of the data ("license"),
@@ -56,7 +70,7 @@ meta data.frame (dplyr "tbl_df") with 1 line and 5 columns:
 \item the limit on the number of results ("limit"),
 \item the number of results found on the platform for the query ("found")
 }
-last, a timestamp data.frame (dplyr "tbl_df") with the query time and the last time at which the data was modified on the platform.
+and a timestamp data.frame (dplyr "tbl_df") with the query time and the last time at which the data was modified on the platform.
 }
 \description{
 Function for getting measurements table from the openAQ API
@@ -70,11 +84,15 @@ not its name, should be used.
   If you write inconsistent combination such as city="Paris" and country="IN", an error message will be returned.
   If you write city="Delhi", you do not need to write the code of the country, unless
   one day there is a city with the same name in another country.
+
+  If you choose to get the attribution in the output, lines might be repeated as there might be several attributions.
 }
 \examples{
 \dontrun{
-aq_measurements(country='IN', limit=9, city='Chennai')
-aq_measurements(country='US', has_geo=TRUE)
+output <- aq_measurements(country='IN', limit=9, city='Chennai')
+output
+attr(output, "meta")
+attr(output, "timestamp")
 }
 }
 

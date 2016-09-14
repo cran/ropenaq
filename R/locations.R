@@ -9,11 +9,14 @@
 #' @param location Limit results by a certain location.
 #' @param parameter Limit to only a certain parameter (valid values are 'pm25', 'pm10', 'so2', 'no2', 'o3', 'co' and 'bc').
 #' If no parameter is given, all parameters are retrieved.
-#' @param has_geo Filter out items that have or do not have geographic information.
+#' @param has_geo has_geo Filter out items that have or do not have geographic information.
+#' @param latitude Latitude of the center point (lat, lon) used to get measurements within a certain area.
+#' @param longitude Longitude of the center point (lat, lon) used to get measurements within a certain area.
+#' @param radius Radius (in meters) used to get measurements within a certain area, must be used with latitude and longitude
 #' @param limit Change the number of results returned, max is 1000.
 #' @param page The page of the results to query. This can be useful if e.g. there are 2000 measurements, then first use page=1 and page=2 with limit=100 to get all measurements for your query.
 
-#' @return  a list of 3 data.frames, a results data.frame (dplyr "tbl_df") with 12 columns:
+#' @return  A results data.frame (dplyr "tbl_df") with 12 columns:
 #'  \itemize{
 #'  \item the name of the location ("location"),
 #'  \item the city it is in ("city"),
@@ -27,7 +30,7 @@
 #'  \item and finally an URL encoded version of the city name ("cityURL")
 #'  \item and of the location name ("locationURL").
 #'  }
-#' meta data.frame (dplyr "tbl_df") with 1 line and 5 columns:
+#' and two attribues, a meta data.frame (dplyr "tbl_df") with 1 line and 5 columns:
 #' \itemize{
 #' \item the API name ("name"),
 #' \item the license of the data ("license"),
@@ -36,7 +39,7 @@
 #' \item the limit on the number of results ("limit"),
 #' \item the number of results found on the platform for the query ("found")
 #' }
-#' last, a timestamp data.frame (dplyr "tbl_df") with the query time and the last time at which the data was modified on the platform.
+#' and a timestamp data.frame (dplyr "tbl_df") with the query time and the last time at which the data was modified on the platform.
 #' @details For queries involving a city or location argument,
 #' the URL-encoded name of the city/location (as in cityURL/locationURL),
 #' not its name, should be used.
@@ -48,10 +51,14 @@
 #' @export
 #'
 #' @examples
-#' aq_locations(country='IN')
+#' india_locations <- aq_locations(country='IN')
+#' india_locations
+#' attr(india_locations, "meta")
+#' attr(india_locations, "timestamp")
 #' aq_locations(city='Houston', parameter='co')
 aq_locations <- function(country = NULL, city = NULL, location = NULL,# nolint
                          parameter = NULL, has_geo = NULL, limit = 100,
+                         latitude = NULL, longitude = NULL, radius = NULL,
                          page = 1) {
 
   ####################################################
@@ -63,12 +70,15 @@ aq_locations <- function(country = NULL, city = NULL, location = NULL,# nolint
                          parameter = parameter,
                          has_geo = has_geo,
                          limit = limit,
+                         latitude = latitude,
+                         longitude = longitude,
+                         radius = radius,
                          page = page)
 
   ####################################################
   # GET AND TRANSFORM RESULTS
   output <- getResults(urlAQ, argsList)
-  locationsTable <- output$results
+  locationsTable <- output
   # if no results
   if (nrow(locationsTable) != 0){
 
@@ -96,8 +106,9 @@ aq_locations <- function(country = NULL, city = NULL, location = NULL,# nolint
   }
   ####################################################
   # DONE!
-  return(list(results = locationsTable,
-              meta = output$meta,
-              timestamp = output$timestamp))
+  attr(locationsTable, "meta") <- attr(output, "meta")
+  attr(locationsTable, "timestamp") <- attr(output, "timestamp")
+
+  return(locationsTable)
 
 }

@@ -25,7 +25,7 @@ library("tidyr")
 #                                               parameter = "pm25",
 #                                               limit = 1000,
 #                                               date_from = "2015-09-01",
-#                                               value_from = 0)$results)}
+#                                               value_from = 0))}
 
 ## ---- warning=FALSE, message=FALSE, eval=FALSE, echo=FALSE---------------
 #  save(measurementsIndia, file="data/measurementsIndia.RData")
