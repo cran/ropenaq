@@ -4,7 +4,6 @@
 #' @importFrom lazyeval interp
 #' @importFrom lubridate ymd ymd_hms
 #' @importFrom jsonlite fromJSON
-#' @importFrom httr GET content
 #' @param country Limit results by a certain country -- a two-letters code see countries() for finding code based on name.
 #' @param city Limit results by a certain city.
 #' @param location Limit results by a certain location.
@@ -21,7 +20,7 @@
 #' @param attribution Logical, whether to add a column with attribution information
 #' @param averaging_period Logical, whether to add a column with averaging_period information
 #' @param source_name Logical, whether to add a column with source_name information
-#' @param limit Change the number of results returned, max is 1000.
+#' @param limit Change the number of results returned, max is 10000.
 #' @param page The page of the results to query. This can be useful if e.g. there are 2000 measurements, then first use page=1 and page=2 with limit=100 to get all measurements for your query.
 
 #'
@@ -72,11 +71,11 @@
 
 aq_measurements <- function(country = NULL, city = NULL, location = NULL,# nolint
                          parameter = NULL, has_geo = NULL, date_from = NULL,
-                         date_to = NULL, limit = 100, value_from = NULL,
+                         date_to = NULL, limit = 10000, value_from = NULL,
                          latitude = NULL, longitude = NULL, radius = NULL,
                          attribution = FALSE, averaging_period = FALSE,
                          source_name = FALSE,
-                         value_to = NULL, page = 1) {
+                         value_to = NULL, page = NULL) {
 
     ####################################################
     # BUILD QUERY base URL

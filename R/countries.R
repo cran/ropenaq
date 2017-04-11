@@ -1,9 +1,8 @@
 #' Provides a simple listing of countries within the platform.
 #'
-#' @param limit Change the number of results returned, max is 1000.
+#' @param limit Change the number of results returned, max is 10000.
 #' @param page The page of the results to query. This can be useful if e.g. there are 2000 measurements, then first use page=1 and page=2 with limit=100 to get all measurements for your query.
 
-#' @importFrom httr GET content
 #' @return  A results data.frame (dplyr "tbl_df") with 3 columns:
 #' \itemize{
 #' \item the number of measures for a country ("count"),
@@ -25,12 +24,12 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' countries <- aq_countries()
 #' countries
-#' attr(countries, "meta")
-#' attr(countries, "timestamp")
-aq_countries <- function(limit = 100,
-                         page = 1) {# nolint
+#' }
+aq_countries <- function(limit = 10000,
+                         page = NULL) {# nolint
   ####################################################
   # BUILD QUERY base URL
   urlAQ <- paste0(base_url(), "countries?")

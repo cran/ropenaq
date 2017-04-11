@@ -5,8 +5,8 @@
 \title{Provides the latest value of each available parameter for every location in the system.}
 \usage{
 aq_latest(country = NULL, city = NULL, location = NULL,
-  parameter = NULL, has_geo = NULL, limit = 100, latitude = NULL,
-  longitude = NULL, radius = NULL, page = 1)
+  parameter = NULL, has_geo = NULL, limit = 10000, latitude = NULL,
+  longitude = NULL, radius = NULL, page = NULL)
 }
 \arguments{
 \item{country}{Limit results by a certain country -- a two-letters code see countries() for finding code based on name.}
@@ -20,7 +20,7 @@ If no parameter is given, all parameters are retrieved.}
 
 \item{has_geo}{has_geo Filter out items that have or do not have geographic information.}
 
-\item{limit}{Change the number of results returned, max is 1000.}
+\item{limit}{Change the number of results returned, max is 10000.}
 
 \item{latitude}{Latitude of the center point (lat, lon) used to get measurements within a certain area.}
 
@@ -77,4 +77,3 @@ attr(latest_chennai, "timestamp")
 aq_latest(parameter='co')
 }
 }
-

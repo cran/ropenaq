@@ -2,10 +2,9 @@
 #'
 #' @importFrom lazyeval interp
 #' @importFrom dplyr mutate_ select_ "%>%" tbl_df
-#' @importFrom httr GET content
 #' @importFrom jsonlite fromJSON
 #' @param country Limit results by a certain country -- a two-letters code see countries() for finding code based on name.
-#' @param limit Change the number of results returned, max is 1000.
+#' @param limit Change the number of results returned, max is 10000.
 #' @param page The page of the results to query. This can be useful if e.g. there are 2000 measurements, then first use page=1 and page=2 with limit=100 to get all measurements for your query.
 
 #'
@@ -33,12 +32,12 @@
 #' @export
 #'
 #' @examples
-#' cities <- aq_cities(country = "IN")
+#' \dontrun{
+#' cities <- aq_cities(country = "BA")
 #' cities
-#' attr(cities, "meta")
-#' attr(cities, "timestamp")
-aq_cities <- function(country = NULL, limit = 100,
-                       page = 1) {# nolint
+#' }
+aq_cities <- function(country = NULL, limit = 10000,
+                       page = NULL) {# nolint
   ####################################################
   # BUILD QUERY
   urlAQ <- paste0(base_url(), "cities")

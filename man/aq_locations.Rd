@@ -5,8 +5,8 @@
 \title{Providing data about distinct measurement locations.}
 \usage{
 aq_locations(country = NULL, city = NULL, location = NULL,
-  parameter = NULL, has_geo = NULL, limit = 100, latitude = NULL,
-  longitude = NULL, radius = NULL, page = 1)
+  parameter = NULL, has_geo = NULL, limit = 10000, latitude = NULL,
+  longitude = NULL, radius = NULL, page = NULL)
 }
 \arguments{
 \item{country}{Limit results by a certain country -- a two-letters code see countries() for finding code based on name.}
@@ -20,7 +20,7 @@ If no parameter is given, all parameters are retrieved.}
 
 \item{has_geo}{has_geo Filter out items that have or do not have geographic information.}
 
-\item{limit}{Change the number of results returned, max is 1000.}
+\item{limit}{Change the number of results returned, max is 10000.}
 
 \item{latitude}{Latitude of the center point (lat, lon) used to get measurements within a certain area.}
 
@@ -70,10 +70,7 @@ not its name, should be used.
   one day there is a city with the same name in another country.
 }
 \examples{
-india_locations <- aq_locations(country='IN')
-india_locations
-attr(india_locations, "meta")
-attr(india_locations, "timestamp")
-aq_locations(city='Houston', parameter='co')
+\dontrun{
+aq_locations(city='Delhi', parameter='co')
 }
-
+}

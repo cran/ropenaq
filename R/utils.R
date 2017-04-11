@@ -20,29 +20,21 @@ buildQuery <- function(country = NULL, city = NULL, location = NULL,
                        page = NULL){
   # limit
   if (!is.null(limit)) {
-    if (limit > 1000) {
-      stop(call. = FALSE, "limit cannot be more than 1000")
+    if (limit > 10000) {
+      stop(call. = FALSE, "limit cannot be more than 10,000")
     }
   }
 
   # location
   if (!is.null(location)) {
-    pagee <- 1
-    locations <- NULL
-    nrows <- 1000
-    while(nrows == 1000){
-      temp <- aq_locations(country = country,
-                           city = city,
-                           page = pagee,
-                           limit = 1000)
-      nrows <- nrow(temp)
-      pagee <- pagee + 1
-      locations <- dplyr::bind_rows(locations, temp)
-    }
+
+    locations <- aq_locations(country = country,
+                           city = city)
+
     if (!(location %in% locations$locationURL)) {# nolint
       stop(call. = FALSE, "This location/city/country combination is not available within the platform. See ?locations")# nolint
     }
-    # make sure it won't be re-encoded by httr
+    # make sure it won't be re-encoded
     Encoding(location) <- "UTF-8"
     class(location) <- c("character", "AsIs")
   }
@@ -50,22 +42,12 @@ buildQuery <- function(country = NULL, city = NULL, location = NULL,
 
   # city
   if (!is.null(city)) {
-    pagee <- 1
-    cities <- NULL
-    nrows <- 1000
-    while(nrows == 1000){
-      temp <- aq_cities(country = country,
-                        page = pagee,
-                        limit = 1000)
-      nrows <- nrow(temp)
-      pagee <- pagee + 1
-      cities <- dplyr::bind_rows(cities, temp)
-    }
+    cities <-  aq_cities(country = country)
 
     if (!(city %in% cities$cityURL)) {# nolint
       stop(call. = FALSE, paste0("This city/country combination is not available within the platform. See ?cities."))# nolint
     }
-    # make sure it won't be re-encoded by httr
+    # make sure it won't be re-encoded
     Encoding(city) <- "UTF-8"
     class(city) <- c("character", "AsIs")
   }
@@ -73,7 +55,7 @@ buildQuery <- function(country = NULL, city = NULL, location = NULL,
   # country
   if (!is.null(country)) {
 
-    if (!(country %in% aq_countries(limit = 1000)$code)) {# nolint
+    if (!(country %in% aq_countries()$code)) {# nolint
       stop(call. = FALSE, "This country is not available within the platform. See ?countries")
     }
   }
@@ -85,20 +67,10 @@ buildQuery <- function(country = NULL, city = NULL, location = NULL,
       stop(call. = FALSE, "You asked for an invalid parameter: see list of valid parameters in the Arguments section of the function help")# nolint
     }
 
+  locations <-  aq_locations(country = country,
+                         city = city,
+                         location = location)
 
-    pagee <- 1
-    locations <- NULL
-    nrows <- 1000
-    while(nrows == 1000){
-      temp <- aq_locations(country = country,
-                           city = city,
-                           page = pagee,
-                           location = location,
-                           limit = 1000)
-      nrows <- nrow(temp)
-      pagee <- pagee + 1
-      locations <- dplyr::bind_rows(locations, temp)
-    }
     if (apply(locations[, parameter], 2, sum) == 0) {
       stop(call. = FALSE, "This parameter is not available for any location corresponding to your query. See ?locations")# nolint
     }
@@ -214,33 +186,85 @@ buildQuery <- function(country = NULL, city = NULL, location = NULL,
   return(argsList)
 }
 
+############################################################
+#                                                          #
+#                       check status                       ####
+#                                                          #
+############################################################
+get_status <- function(){
+  client <- crul::HttpClient$new(url = "https://api.openaq.org/status")
+  status <- client$get()
+  status <- suppressMessages(status$parse())
+  status <- jsonlite::fromJSON(status)
+  return(status$results$healthStatus)
+  }
+
 ######################################################################################
-# does the query and then parses it
+# gets and parses
 getResults <- function(urlAQ, argsList){
-  page <- httr::GET(url = urlAQ,
-                    query = argsList)
-  # convert the http error to a R error
-  httr::stop_for_status(page)
-  contentPage <- httr::content(page, as = "text")
-  # parse the data
-  output <- jsonlite::fromJSON(contentPage,
-                               flatten =TRUE)
+  if(!is.null(argsList$page)){
+    getResults_bypage(urlAQ, argsList)
+  }else{
+    getResults_bymorepages(urlAQ, argsList)
+  }
 
-  results <- dplyr::tbl_df(output$results)
+}
+getResults_bypage <- function(urlAQ, argsList){
 
-  # get the meta
-  meta <- dplyr::tbl_df(
-    as.data.frame(output$meta))
+  client <- crul::HttpClient$new(url = urlAQ)
+  argsList <- Filter(Negate(is.null), argsList)
+  res <- client$get(query = argsList)
+  try_number <- 1
+  while(res$status_code >= 400 && try_number < 6) {status <- get_status()
+  if(status %in% c("green", "yellow")){
+    message(paste0("Server returned nothing, trying again, try number", try_number))
+    Sys.sleep(2^try_number)
+    res <- client$get(query = argsList)
+    try_number <- try_number + 1
+  }else{
+    stop("uh oh, the OpenAQ API seems to be having some issues, try again later")
+  }
 
-  #get the time stamps
-  timestamp <- dplyr::tbl_df(data.frame(
-    lastModif = func_date_headers(httr::headers(page)$"last-modified"),
-    queriedAt = func_date_headers(httr::headers(page)$date)))
-
-  attr(results, "meta") <- meta
-  attr(results, "timestamp") <- timestamp
-
+  }
+  if(argsList$limit == 0){
+    contentPage <- suppressMessages(res$parse())
+    # parse the data
+    output <- jsonlite::fromJSON(contentPage)
+    return(output$meta$found)
+  }
+  results <- treat_res(res)
   return(results)
+
+  }
+
+getResults_bymorepages <- function(urlAQ, argsList){
+  argsList <- Filter(Negate(is.null), argsList)
+  # find number of total pages
+  argsList2 <- argsList
+  argsList2$page <- 1
+  argsList2$limit <- 0
+  count <- getResults_bypage(urlAQ, argsList2)
+  if(is.na(argsList$limit)){
+    limit <- 10000
+  }else{
+    limit <- argsList$limit
+  }
+  no_pages <- ceiling(count/limit)
+  if(no_pages == 1){
+    return(getResults_bypage(urlAQ, argsList))
+  }else{
+    queries <- lapply(1:no_pages,
+                      add_page,
+                      query = argsList)
+
+    # 10 urls by request
+    requests <- lapply(queries, create_request,
+                       urlAQ = urlAQ)
+    requests <- split(requests, ceiling(seq_along(requests)/10))
+
+    res_list <- lapply(requests, get_res)
+    dplyr::bind_rows(res_list)
+  }
 }
 
 ######################################################################################
@@ -286,7 +310,7 @@ functionTime <- function(resTable, newColName) {
 ######################################################################################
 # create the parameters column
 functionParameters <- function(resTable) {
-  mutateCall <- lazyeval::interp( ~ unlist(lapply(a, toString)),
+  mutateCall <- lazyeval::interp( ~ unlist(vapply(a, toString, "")),
                                   a = as.name("parameters")) %>%
     lazyeval::interp( ~ gsub(.dot, pattern = "\"", sub = "")) %>%
     lazyeval::interp( ~ gsub(.dot, pattern = "\\(", sub = "")) %>%
@@ -322,4 +346,84 @@ func_date_headers <- function(date){
   date <- gsub("Nov", "11", date)
   date <- gsub("Dec", "12", date)
   lubridate::dmy_hms(date, tz = "GMT")
+}
+
+
+add_page <- function(page, query){
+  query$page <- page
+  return(query)
+}
+
+treat_res <- function(res){
+  contentPage <- suppressMessages(res$parse())
+  # parse the data
+  output <- jsonlite::fromJSON(contentPage)
+
+  coordinates <- output$results$coordinates
+  date <- output$results$date
+  averagingPeriod <- output$results$averagingPeriod
+
+  if(!is.null(date)){
+    date <- rename_(date, date.utc = "utc")
+    date <- rename_(date, date.local = "local")
+
+  }
+  if(!is.null(averagingPeriod)){
+    averagingPeriod <- rename_(averagingPeriod, averagingPeriod.unit = "unit")
+    averagingPeriod <- rename_(averagingPeriod, averagingPeriod.value = "value")
+
+  }
+  results <- output$results
+
+  if("averagingPeriod" %in% names(results)){
+    results <- dplyr::select_(results, quote(- averagingPeriod))
+  }
+  if("coordinates" %in% names(results)){
+    results <- dplyr::select_(results, quote(- coordinates))
+  }
+  if("date" %in% names(results)){
+    results <- dplyr::select_(results, quote(- date))
+  }
+  results <- dplyr::bind_cols(results, coordinates)
+  results <- dplyr::bind_cols(results, date)
+  results <- dplyr::bind_cols(results, averagingPeriod)
+
+  results <- dplyr::tbl_df(results)
+
+  # get the meta
+  meta <- dplyr::tbl_df(
+    as.data.frame(output$meta))
+  #get the time stamps
+  timestamp <- dplyr::tbl_df(data.frame(
+    queriedAt = func_date_headers(res$response_headers$date)))
+
+  attr(results, "meta") <- meta
+  attr(results, "timestamp") <- timestamp
+  attr(results, "url") <- res$url
+  return(results)
+}
+
+
+create_request <- function(query, urlAQ){
+  crul::HttpRequest$new(url = urlAQ)$get(query = query)
+}
+
+# get results for an
+get_res <- function(async){
+  res <- crul::AsyncVaried$new(.list = async)
+  output <- res$request()
+  try_number <- 1
+  while(any(res$status_code() >= 400) && try_number < 6) {status <- get_status()
+  if(status %in% c("green", "yellow")){
+    message(paste0("Server returned nothing, trying again, try number", try_number))
+    Sys.sleep(2^try_number)
+    output <- res$request()
+    try_number <- try_number + 1
+  }else{
+    stop("uh oh, the OpenAQ API seems to be having some issues, try again later")
+  }
+
+  }
+
+  lapply(output, treat_res) %>% bind_rows()
 }

@@ -1,6 +1,5 @@
 #' Provides the latest value of each available parameter for every location in the system.
 #'
-#' @importFrom httr GET content
 #' @importFrom tidyr unnest
 #' @importFrom lubridate ymd_hms
 #' @importFrom dplyr bind_rows tbl_df "%>%"
@@ -13,7 +12,7 @@
 #' @param latitude Latitude of the center point (lat, lon) used to get measurements within a certain area.
 #' @param longitude Longitude of the center point (lat, lon) used to get measurements within a certain area.
 #' @param radius Radius (in meters) used to get measurements within a certain area, must be used with latitude and longitude
-#' @param limit Change the number of results returned, max is 1000.
+#' @param limit Change the number of results returned, max is 10000.
 #' @param page The page of the results to query. This can be useful if e.g. there are 2000 measurements, then first use page=1 and page=2 with limit=100 to get all measurements for your query.
 
 #' @details For queries involving a city or location argument,
@@ -57,9 +56,9 @@
 #' and a timestamp data.frame (dplyr "tbl_df") with the query time and the last time at which the data was modified on the platform.
 #' @export
 aq_latest <- function(country = NULL, city = NULL, location = NULL,# nolint
-                   parameter = NULL, has_geo = NULL, limit = 100,
+                   parameter = NULL, has_geo = NULL, limit = 10000,
                    latitude = NULL, longitude = NULL, radius = NULL,
-                   page = 1) {
+                   page = NULL) {
 
     ####################################################
     # BUILD QUERY base URL

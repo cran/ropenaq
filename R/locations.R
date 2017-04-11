@@ -1,7 +1,6 @@
 #' Providing data about distinct measurement locations.
 #'
 #' @importFrom lubridate ymd ymd_hms
-#' @importFrom httr GET content
 #' @importFrom dplyr  "%>%" tbl_df rename_
 #'
 #' @param country Limit results by a certain country -- a two-letters code see countries() for finding code based on name.
@@ -13,7 +12,7 @@
 #' @param latitude Latitude of the center point (lat, lon) used to get measurements within a certain area.
 #' @param longitude Longitude of the center point (lat, lon) used to get measurements within a certain area.
 #' @param radius Radius (in meters) used to get measurements within a certain area, must be used with latitude and longitude
-#' @param limit Change the number of results returned, max is 1000.
+#' @param limit Change the number of results returned, max is 10000.
 #' @param page The page of the results to query. This can be useful if e.g. there are 2000 measurements, then first use page=1 and page=2 with limit=100 to get all measurements for your query.
 
 #' @return  A results data.frame (dplyr "tbl_df") with 12 columns:
@@ -51,15 +50,13 @@
 #' @export
 #'
 #' @examples
-#' india_locations <- aq_locations(country='IN')
-#' india_locations
-#' attr(india_locations, "meta")
-#' attr(india_locations, "timestamp")
-#' aq_locations(city='Houston', parameter='co')
+#' \dontrun{
+#' aq_locations(city='Delhi', parameter='co')
+#' }
 aq_locations <- function(country = NULL, city = NULL, location = NULL,# nolint
-                         parameter = NULL, has_geo = NULL, limit = 100,
+                         parameter = NULL, has_geo = NULL, limit = 10000,
                          latitude = NULL, longitude = NULL, radius = NULL,
-                         page = 1) {
+                         page = NULL) {
 
   ####################################################
   # BUILD QUERY base URL

@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -12,7 +12,7 @@
 
 <meta name="author" content="M. Salmon" />
 
-<meta name="date" content="2016-09-14" />
+<meta name="date" content="2017-04-11" />
 
 <title>R package ropenaq</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">R package ropenaq</h1>
 <h4 class="author"><em>M. Salmon</em></h4>
-<h4 class="date"><em>2016-09-14</em></h4>
+<h4 class="date"><em>2017-04-11</em></h4>
 
 
 
@@ -87,352 +87,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;ropenaq&quot;</span>)
 countries_table &lt;-<span class="st"> </span><span class="kw">aq_countries</span>()
 <span class="kw">library</span>(<span class="st">&quot;knitr&quot;</span>)
-<span class="kw">kable</span>(countries_table)</code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">name</th>
-<th align="left">code</th>
-<th align="right">cities</th>
-<th align="right">locations</th>
-<th align="right">count</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Australia</td>
-<td align="left">AU</td>
-<td align="right">11</td>
-<td align="right">28</td>
-<td align="right">816513</td>
-</tr>
-<tr class="even">
-<td align="left">Bosnia and Herzegovina</td>
-<td align="left">BA</td>
-<td align="right">4</td>
-<td align="right">11</td>
-<td align="right">166827</td>
-</tr>
-<tr class="odd">
-<td align="left">Bangladesh</td>
-<td align="left">BD</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">5861</td>
-</tr>
-<tr class="even">
-<td align="left">Brazil</td>
-<td align="left">BR</td>
-<td align="right">73</td>
-<td align="right">113</td>
-<td align="right">1258245</td>
-</tr>
-<tr class="odd">
-<td align="left">Canada</td>
-<td align="left">CA</td>
-<td align="right">11</td>
-<td align="right">157</td>
-<td align="right">591249</td>
-</tr>
-<tr class="even">
-<td align="left">Chile</td>
-<td align="left">CL</td>
-<td align="right">96</td>
-<td align="right">104</td>
-<td align="right">1856820</td>
-</tr>
-<tr class="odd">
-<td align="left">China</td>
-<td align="left">CN</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="right">50606</td>
-</tr>
-<tr class="even">
-<td align="left">Colombia</td>
-<td align="left">CO</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">4338</td>
-</tr>
-<tr class="odd">
-<td align="left">Ethiopia</td>
-<td align="left">ET</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">635</td>
-</tr>
-<tr class="even">
-<td align="left">United Kingdom</td>
-<td align="left">GB</td>
-<td align="right">105</td>
-<td align="right">152</td>
-<td align="right">1654882</td>
-</tr>
-<tr class="odd">
-<td align="left">Indonesia</td>
-<td align="left">ID</td>
-<td align="right">2</td>
-<td align="right">3</td>
-<td align="right">15435</td>
-</tr>
-<tr class="even">
-<td align="left">Israel</td>
-<td align="left">IL</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1826</td>
-</tr>
-<tr class="odd">
-<td align="left">India</td>
-<td align="left">IN</td>
-<td align="right">34</td>
-<td align="right">79</td>
-<td align="right">1261824</td>
-</tr>
-<tr class="even">
-<td align="left">Mongolia</td>
-<td align="left">MN</td>
-<td align="right">1</td>
-<td align="right">12</td>
-<td align="right">917464</td>
-</tr>
-<tr class="odd">
-<td align="left">Mexico</td>
-<td align="left">MX</td>
-<td align="right">5</td>
-<td align="right">48</td>
-<td align="right">584598</td>
-</tr>
-<tr class="even">
-<td align="left">Nigeria</td>
-<td align="left">NG</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">2541</td>
-</tr>
-<tr class="odd">
-<td align="left">Netherlands</td>
-<td align="left">NL</td>
-<td align="right">67</td>
-<td align="right">109</td>
-<td align="right">2170561</td>
-</tr>
-<tr class="even">
-<td align="left">Peru</td>
-<td align="left">PE</td>
-<td align="right">1</td>
-<td align="right">11</td>
-<td align="right">209592</td>
-</tr>
-<tr class="odd">
-<td align="left">Philippines</td>
-<td align="left">PH</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">958</td>
-</tr>
-<tr class="even">
-<td align="left">Poland</td>
-<td align="left">PL</td>
-<td align="right">10</td>
-<td align="right">15</td>
-<td align="right">445616</td>
-</tr>
-<tr class="odd">
-<td align="left">Singapore</td>
-<td align="left">SG</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1275</td>
-</tr>
-<tr class="even">
-<td align="left">Thailand</td>
-<td align="left">TH</td>
-<td align="right">33</td>
-<td align="right">61</td>
-<td align="right">1111023</td>
-</tr>
-<tr class="odd">
-<td align="left">United States</td>
-<td align="left">US</td>
-<td align="right">688</td>
-<td align="right">1756</td>
-<td align="right">8823333</td>
-</tr>
-<tr class="even">
-<td align="left">Viet Nam</td>
-<td align="left">VN</td>
-<td align="right">2</td>
-<td align="right">3</td>
-<td align="right">12155</td>
-</tr>
-<tr class="odd">
-<td align="left">Kosovo</td>
-<td align="left">XK</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">3803</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attr</span>(countries_table, <span class="st">&quot;meta&quot;</span>)
-<span class="co">#&gt; # A tibble: 1 × 6</span>
-<span class="co">#&gt;         name   license                  website  page limit found</span>
-<span class="co">#&gt;       &lt;fctr&gt;    &lt;fctr&gt;                   &lt;fctr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1 openaq-api CC BY 4.0 https://docs.openaq.org/     1   100    25</span>
-<span class="kw">attr</span>(countries_table, <span class="st">&quot;timestamp&quot;</span>)
-<span class="co">#&gt; # A tibble: 1 × 2</span>
-<span class="co">#&gt;             lastModif           queriedAt</span>
-<span class="co">#&gt;                &lt;dttm&gt;              &lt;dttm&gt;</span>
-<span class="co">#&gt; 1 2016-09-14 09:21:55 2016-09-14 09:25:44</span></code></pre></div>
+<span class="kw">kable</span>(countries_table)
+<span class="kw">attr</span>(countries_table, <span class="st">&quot;meta&quot;</span>)
+<span class="kw">attr</span>(countries_table, <span class="st">&quot;timestamp&quot;</span>)</code></pre></div>
 </div>
 <div id="the-aq_cities-function" class="section level2">
 <h2>The <code>aq_cities</code> function</h2>
 <p>Using the <code>aq_cities</code> functions one can get all cities for which information is available within the platform. For each city, one gets the number of locations and the count of measures for the city, the URL encoded string, and the country it is in.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cities_table &lt;-<span class="st"> </span><span class="kw">aq_cities</span>()
 <span class="kw">kable</span>(<span class="kw">head</span>(cities_table))</code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">city</th>
-<th align="left">country</th>
-<th align="right">locations</th>
-<th align="right">count</th>
-<th align="left">cityURL</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">76t</td>
-<td align="left">TH</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="left">76t</td>
-</tr>
-<tr class="even">
-<td align="left">ABBEVILLE</td>
-<td align="left">US</td>
-<td align="right">1</td>
-<td align="right">2702</td>
-<td align="left">ABBEVILLE</td>
-</tr>
-<tr class="odd">
-<td align="left">Aberdeen</td>
-<td align="left">GB</td>
-<td align="right">3</td>
-<td align="right">26702</td>
-<td align="left">Aberdeen</td>
-</tr>
-<tr class="even">
-<td align="left">Aberdeen</td>
-<td align="left">US</td>
-<td align="right">2</td>
-<td align="right">6525</td>
-<td align="left">Aberdeen</td>
-</tr>
-<tr class="odd">
-<td align="left">ADA</td>
-<td align="left">US</td>
-<td align="right">1</td>
-<td align="right">8158</td>
-<td align="left">ADA</td>
-</tr>
-<tr class="even">
-<td align="left">ADAIR</td>
-<td align="left">US</td>
-<td align="right">1</td>
-<td align="right">11253</td>
-<td align="left">ADAIR</td>
-</tr>
-</tbody>
-</table>
 <p>The optional <code>country</code> argument allows to do this for a given country instead of the whole world.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cities_tableIndia &lt;-<span class="st"> </span><span class="kw">aq_cities</span>(<span class="dt">country=</span><span class="st">&quot;IN&quot;</span>, <span class="dt">limit =</span> <span class="dv">10</span>)
 <span class="kw">kable</span>(cities_tableIndia)</code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">city</th>
-<th align="left">country</th>
-<th align="right">locations</th>
-<th align="right">count</th>
-<th align="left">cityURL</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Agra</td>
-<td align="left">IN</td>
-<td align="right">1</td>
-<td align="right">20640</td>
-<td align="left">Agra</td>
-</tr>
-<tr class="even">
-<td align="left">Ahmedabad</td>
-<td align="left">IN</td>
-<td align="right">1</td>
-<td align="right">11525</td>
-<td align="left">Ahmedabad</td>
-</tr>
-<tr class="odd">
-<td align="left">Aurangabad</td>
-<td align="left">IN</td>
-<td align="right">1</td>
-<td align="right">4780</td>
-<td align="left">Aurangabad</td>
-</tr>
-<tr class="even">
-<td align="left">Barddhaman</td>
-<td align="left">IN</td>
-<td align="right">1</td>
-<td align="right">2260</td>
-<td align="left">Barddhaman</td>
-</tr>
-<tr class="odd">
-<td align="left">Bengaluru</td>
-<td align="left">IN</td>
-<td align="right">5</td>
-<td align="right">72068</td>
-<td align="left">Bengaluru</td>
-</tr>
-<tr class="even">
-<td align="left">Chandrapur</td>
-<td align="left">IN</td>
-<td align="right">2</td>
-<td align="right">31771</td>
-<td align="left">Chandrapur</td>
-</tr>
-<tr class="odd">
-<td align="left">Chennai</td>
-<td align="left">IN</td>
-<td align="right">4</td>
-<td align="right">47736</td>
-<td align="left">Chennai</td>
-</tr>
-<tr class="even">
-<td align="left">Chittoor</td>
-<td align="left">IN</td>
-<td align="right">1</td>
-<td align="right">2013</td>
-<td align="left">Chittoor</td>
-</tr>
-<tr class="odd">
-<td align="left">Delhi</td>
-<td align="left">IN</td>
-<td align="right">15</td>
-<td align="right">286831</td>
-<td align="left">Delhi</td>
-</tr>
-<tr class="even">
-<td align="left">Faridabad</td>
-<td align="left">IN</td>
-<td align="right">1</td>
-<td align="right">35013</td>
-<td align="left">Faridabad</td>
-</tr>
-</tbody>
-</table>
 <p>If one inputs a country that is not in the platform (or misspells a code), then an error message is thrown.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#aq_cities(country=&quot;PANEM&quot;)</span></code></pre></div>
 </div>
@@ -442,52 +108,6 @@ countries_table &lt;-<span class="st"> </span><span class="kw">aq_countries</spa
 <p>Here we only look for locations with PM2.5 information in Chennai, India.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">locations_chennai &lt;-<span class="st"> </span><span class="kw">aq_locations</span>(<span class="dt">country =</span> <span class="st">&quot;IN&quot;</span>, <span class="dt">city =</span> <span class="st">&quot;Chennai&quot;</span>, <span class="dt">parameter =</span> <span class="st">&quot;pm25&quot;</span>)
 <span class="kw">kable</span>(locations_chennai)</code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">location</th>
-<th align="left">city</th>
-<th align="left">country</th>
-<th align="left">sourceName</th>
-<th align="right">count</th>
-<th align="left">lastUpdated</th>
-<th align="left">firstUpdated</th>
-<th align="right">latitude</th>
-<th align="right">longitude</th>
-<th align="left">pm25</th>
-<th align="left">pm10</th>
-<th align="left">no2</th>
-<th align="left">so2</th>
-<th align="left">o3</th>
-<th align="left">co</th>
-<th align="left">bc</th>
-<th align="left">cityURL</th>
-<th align="left">locationURL</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">US Diplomatic Post: Chennai</td>
-<td align="left">Chennai</td>
-<td align="left">IN</td>
-<td align="left">StateAir_Chennai</td>
-<td align="right">6483</td>
-<td align="left">2016-09-14 08:30:00</td>
-<td align="left">2015-12-11 21:30:00</td>
-<td align="right">13.05237</td>
-<td align="right">80.25193</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">FALSE</td>
-<td align="left">FALSE</td>
-<td align="left">FALSE</td>
-<td align="left">FALSE</td>
-<td align="left">FALSE</td>
-<td align="left">Chennai</td>
-<td align="left">US+Diplomatic+Post%3A+Chennai</td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div id="getting-measurements" class="section level1">
@@ -495,113 +115,9 @@ countries_table &lt;-<span class="st"> </span><span class="kw">aq_countries</spa
 <p>Two functions allow to get data: <code>aq_measurement</code> and <code>aq_latest</code>. In both of them the arguments city and location needs to be given as URL encoded strings.</p>
 <div id="the-aq_measurements-function" class="section level2">
 <h2>The <code>aq_measurements</code> function</h2>
-<p>The <code>aq_measurements</code> function has many arguments for getting a query specific to, say, a given parameter in a given location or for a given circle outside a central point by the use of the <code>latitude</code>, <code>longitude</code> and <code>radius</code> arguments. Below we get the PM2.5 measures for Anand Vihar in Delhi in India.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results_table &lt;-<span class="st"> </span><span class="kw">aq_measurements</span>(<span class="dt">country =</span> <span class="st">&quot;IN&quot;</span>, <span class="dt">city =</span> <span class="st">&quot;Delhi&quot;</span>, <span class="dt">location =</span> <span class="st">&quot;Anand+Vihar&quot;</span>, <span class="dt">parameter =</span> <span class="st">&quot;pm25&quot;</span>)
+<p>The <code>aq_measurements</code> function has many arguments for getting a query specific to, say, a given parameter in a given location or for a given circle outside a central point by the use of the <code>latitude</code>, <code>longitude</code> and <code>radius</code> arguments. Below we get the PM2.5 measures for Delhi in India.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results_table &lt;-<span class="st"> </span><span class="kw">aq_measurements</span>(<span class="dt">country =</span> <span class="st">&quot;IN&quot;</span>, <span class="dt">city =</span> <span class="st">&quot;Delhi&quot;</span>, <span class="dt">parameter =</span> <span class="st">&quot;pm25&quot;</span>)
 <span class="kw">kable</span>(<span class="kw">head</span>(results_table))</code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">location</th>
-<th align="left">parameter</th>
-<th align="right">value</th>
-<th align="left">unit</th>
-<th align="left">country</th>
-<th align="left">city</th>
-<th align="left">dateUTC</th>
-<th align="left">dateLocal</th>
-<th align="right">latitude</th>
-<th align="right">longitude</th>
-<th align="left">cityURL</th>
-<th align="left">locationURL</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Anand Vihar</td>
-<td align="left">pm25</td>
-<td align="right">52</td>
-<td align="left">µg/m³</td>
-<td align="left">IN</td>
-<td align="left">Delhi</td>
-<td align="left">2016-09-14 08:35:00</td>
-<td align="left">2016-09-14 14:05:00</td>
-<td align="right">28.6508</td>
-<td align="right">77.3152</td>
-<td align="left">Delhi</td>
-<td align="left">Anand+Vihar</td>
-</tr>
-<tr class="even">
-<td align="left">Anand Vihar</td>
-<td align="left">pm25</td>
-<td align="right">67</td>
-<td align="left">µg/m³</td>
-<td align="left">IN</td>
-<td align="left">Delhi</td>
-<td align="left">2016-09-14 08:05:00</td>
-<td align="left">2016-09-14 13:35:00</td>
-<td align="right">28.6508</td>
-<td align="right">77.3152</td>
-<td align="left">Delhi</td>
-<td align="left">Anand+Vihar</td>
-</tr>
-<tr class="odd">
-<td align="left">Anand Vihar</td>
-<td align="left">pm25</td>
-<td align="right">67</td>
-<td align="left">µg/m³</td>
-<td align="left">IN</td>
-<td align="left">Delhi</td>
-<td align="left">2016-09-14 07:35:00</td>
-<td align="left">2016-09-14 13:05:00</td>
-<td align="right">28.6508</td>
-<td align="right">77.3152</td>
-<td align="left">Delhi</td>
-<td align="left">Anand+Vihar</td>
-</tr>
-<tr class="even">
-<td align="left">Anand Vihar</td>
-<td align="left">pm25</td>
-<td align="right">61</td>
-<td align="left">µg/m³</td>
-<td align="left">IN</td>
-<td align="left">Delhi</td>
-<td align="left">2016-09-14 07:05:00</td>
-<td align="left">2016-09-14 12:35:00</td>
-<td align="right">28.6508</td>
-<td align="right">77.3152</td>
-<td align="left">Delhi</td>
-<td align="left">Anand+Vihar</td>
-</tr>
-<tr class="odd">
-<td align="left">Anand Vihar</td>
-<td align="left">pm25</td>
-<td align="right">61</td>
-<td align="left">µg/m³</td>
-<td align="left">IN</td>
-<td align="left">Delhi</td>
-<td align="left">2016-09-14 06:35:00</td>
-<td align="left">2016-09-14 12:05:00</td>
-<td align="right">28.6508</td>
-<td align="right">77.3152</td>
-<td align="left">Delhi</td>
-<td align="left">Anand+Vihar</td>
-</tr>
-<tr class="even">
-<td align="left">Anand Vihar</td>
-<td align="left">pm25</td>
-<td align="right">57</td>
-<td align="left">µg/m³</td>
-<td align="left">IN</td>
-<td align="left">Delhi</td>
-<td align="left">2016-09-14 06:05:00</td>
-<td align="left">2016-09-14 11:35:00</td>
-<td align="right">28.6508</td>
-<td align="right">77.3152</td>
-<td align="left">Delhi</td>
-<td align="left">Anand+Vihar</td>
-</tr>
-</tbody>
-</table>
 <p>One could also get all possible parameters in the same table.</p>
 </div>
 <div id="the-aq_latest-function" class="section level2">
@@ -609,244 +125,16 @@ countries_table &lt;-<span class="st"> </span><span class="kw">aq_countries</spa
 <p>This function gives a table with all newest measures for the locations that are chosen by the arguments. If all arguments are <code>NULL</code>, it gives all the newest measures for all locations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tableLatest &lt;-<span class="st"> </span><span class="kw">aq_latest</span>()
 <span class="kw">kable</span>(<span class="kw">head</span>(tableLatest))</code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">location</th>
-<th align="left">city</th>
-<th align="left">country</th>
-<th align="right">latitude</th>
-<th align="right">longitude</th>
-<th align="left">parameter</th>
-<th align="right">value</th>
-<th align="left">lastUpdated</th>
-<th align="left">unit</th>
-<th align="left">cityURL</th>
-<th align="left">locationURL</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">100 ail</td>
-<td align="left">Ulaanbaatar</td>
-<td align="left">MN</td>
-<td align="right">47.93291</td>
-<td align="right">106.92138</td>
-<td align="left">co</td>
-<td align="right">-94.000</td>
-<td align="left">2016-09-13 04:00:00</td>
-<td align="left">µg/m³</td>
-<td align="left">Ulaanbaatar</td>
-<td align="left">100+ail</td>
-</tr>
-<tr class="even">
-<td align="left">100 ail</td>
-<td align="left">Ulaanbaatar</td>
-<td align="left">MN</td>
-<td align="right">47.93291</td>
-<td align="right">106.92138</td>
-<td align="left">no2</td>
-<td align="right">20.000</td>
-<td align="left">2016-09-14 09:15:00</td>
-<td align="left">µg/m³</td>
-<td align="left">Ulaanbaatar</td>
-<td align="left">100+ail</td>
-</tr>
-<tr class="odd">
-<td align="left">100 ail</td>
-<td align="left">Ulaanbaatar</td>
-<td align="left">MN</td>
-<td align="right">47.93291</td>
-<td align="right">106.92138</td>
-<td align="left">o3</td>
-<td align="right">35.000</td>
-<td align="left">2016-09-14 09:15:00</td>
-<td align="left">µg/m³</td>
-<td align="left">Ulaanbaatar</td>
-<td align="left">100+ail</td>
-</tr>
-<tr class="even">
-<td align="left">100 ail</td>
-<td align="left">Ulaanbaatar</td>
-<td align="left">MN</td>
-<td align="right">47.93291</td>
-<td align="right">106.92138</td>
-<td align="left">pm10</td>
-<td align="right">198.000</td>
-<td align="left">2016-09-14 09:15:00</td>
-<td align="left">µg/m³</td>
-<td align="left">Ulaanbaatar</td>
-<td align="left">100+ail</td>
-</tr>
-<tr class="odd">
-<td align="left">100 ail</td>
-<td align="left">Ulaanbaatar</td>
-<td align="left">MN</td>
-<td align="right">47.93291</td>
-<td align="right">106.92138</td>
-<td align="left">so2</td>
-<td align="right">3.000</td>
-<td align="left">2016-09-14 09:15:00</td>
-<td align="left">µg/m³</td>
-<td align="left">Ulaanbaatar</td>
-<td align="left">100+ail</td>
-</tr>
-<tr class="even">
-<td align="left">16th and Whitmore</td>
-<td align="left">Omaha-Council Bluffs</td>
-<td align="left">US</td>
-<td align="right">41.32247</td>
-<td align="right">-95.93799</td>
-<td align="left">o3</td>
-<td align="right">0.008</td>
-<td align="left">2016-09-14 07:00:00</td>
-<td align="left">ppm</td>
-<td align="left">Omaha-Council+Bluffs</td>
-<td align="left">16th+and+Whitmore</td>
-</tr>
-</tbody>
-</table>
-<p>Below are the latest values for Anand Vihar at the time this vignette was compiled (cache=FALSE).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tableLatest &lt;-<span class="st"> </span><span class="kw">aq_latest</span>(<span class="dt">country=</span><span class="st">&quot;IN&quot;</span>, <span class="dt">city=</span><span class="st">&quot;Delhi&quot;</span>, <span class="dt">location=</span><span class="st">&quot;Anand+Vihar&quot;</span>)
+<p>Below are the latest values for Hyderabad at the time this vignette was compiled.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tableLatest &lt;-<span class="st"> </span><span class="kw">aq_latest</span>(<span class="dt">country=</span><span class="st">&quot;IN&quot;</span>, <span class="dt">city=</span><span class="st">&quot;Hyderabad&quot;</span>)
 <span class="kw">kable</span>(<span class="kw">head</span>(tableLatest))</code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">location</th>
-<th align="left">city</th>
-<th align="left">country</th>
-<th align="right">latitude</th>
-<th align="right">longitude</th>
-<th align="left">parameter</th>
-<th align="right">value</th>
-<th align="left">lastUpdated</th>
-<th align="left">unit</th>
-<th align="left">cityURL</th>
-<th align="left">locationURL</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Anand Vihar</td>
-<td align="left">Delhi</td>
-<td align="left">IN</td>
-<td align="right">28.6508</td>
-<td align="right">77.3152</td>
-<td align="left">co</td>
-<td align="right">1300.0</td>
-<td align="left">2016-03-21 14:45:00</td>
-<td align="left">µg/m³</td>
-<td align="left">Delhi</td>
-<td align="left">Anand+Vihar</td>
-</tr>
-<tr class="even">
-<td align="left">Anand Vihar</td>
-<td align="left">Delhi</td>
-<td align="left">IN</td>
-<td align="right">28.6508</td>
-<td align="right">77.3152</td>
-<td align="left">no2</td>
-<td align="right">43.1</td>
-<td align="left">2016-09-14 08:35:00</td>
-<td align="left">µg/m³</td>
-<td align="left">Delhi</td>
-<td align="left">Anand+Vihar</td>
-</tr>
-<tr class="odd">
-<td align="left">Anand Vihar</td>
-<td align="left">Delhi</td>
-<td align="left">IN</td>
-<td align="right">28.6508</td>
-<td align="right">77.3152</td>
-<td align="left">o3</td>
-<td align="right">30.9</td>
-<td align="left">2016-09-14 08:35:00</td>
-<td align="left">µg/m³</td>
-<td align="left">Delhi</td>
-<td align="left">Anand+Vihar</td>
-</tr>
-<tr class="even">
-<td align="left">Anand Vihar</td>
-<td align="left">Delhi</td>
-<td align="left">IN</td>
-<td align="right">28.6508</td>
-<td align="right">77.3152</td>
-<td align="left">pm10</td>
-<td align="right">232.0</td>
-<td align="left">2016-09-14 08:35:00</td>
-<td align="left">µg/m³</td>
-<td align="left">Delhi</td>
-<td align="left">Anand+Vihar</td>
-</tr>
-<tr class="odd">
-<td align="left">Anand Vihar</td>
-<td align="left">Delhi</td>
-<td align="left">IN</td>
-<td align="right">28.6508</td>
-<td align="right">77.3152</td>
-<td align="left">pm25</td>
-<td align="right">52.0</td>
-<td align="left">2016-09-14 08:35:00</td>
-<td align="left">µg/m³</td>
-<td align="left">Delhi</td>
-<td align="left">Anand+Vihar</td>
-</tr>
-<tr class="even">
-<td align="left">Anand Vihar</td>
-<td align="left">Delhi</td>
-<td align="left">IN</td>
-<td align="right">28.6508</td>
-<td align="right">77.3152</td>
-<td align="left">so2</td>
-<td align="right">18.0</td>
-<td align="left">2016-03-21 14:45:00</td>
-<td align="left">µg/m³</td>
-<td align="left">Delhi</td>
-<td align="left">Anand+Vihar</td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div id="paging-and-limit" class="section level1">
 <h1>Paging and limit</h1>
-<p>For all endpoints/functions, there a a <code>limit</code> and a <code>page</code> arguments, which indicate, respectively, how many results per page should be shown and which page should be queried. Based on this, how to get all results corresponding to a query? First, look at the number of results, e.g.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">how_many &lt;-<span class="st"> </span><span class="kw">attr</span>(<span class="kw">aq_measurements</span>(<span class="dt">city =</span> <span class="st">&quot;Delhi&quot;</span>,
-                            <span class="dt">parameter =</span> <span class="st">&quot;pm25&quot;</span>), <span class="st">&quot;meta&quot;</span>)
-knitr::<span class="kw">kable</span>(how_many)</code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">name</th>
-<th align="left">license</th>
-<th align="left">website</th>
-<th align="right">page</th>
-<th align="right">limit</th>
-<th align="right">found</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">openaq-api</td>
-<td align="left">CC BY 4.0</td>
-<td align="left"><a href="https://docs.openaq.org/" class="uri">https://docs.openaq.org/</a></td>
-<td align="right">1</td>
-<td align="right">100</td>
-<td align="right">52147</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">how_many$found
-<span class="co">#&gt; [1] 52147</span></code></pre></div>
-<p>Then one can write a loop over pages. Note that the maximal value of <code>limit</code> is 1000.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">meas &lt;-<span class="st"> </span><span class="ot">NULL</span>
-for (page in <span class="dv">1</span>:(<span class="kw">ceiling</span>(how_many$found/<span class="dv">1000</span>))){
-  meas &lt;-<span class="st"> </span>dplyr::<span class="kw">bind_rows</span>(meas,
-                <span class="kw">aq_measurements</span>(<span class="dt">city =</span> <span class="st">&quot;Delhi&quot;</span>,
-                                <span class="dt">parameter =</span> <span class="st">&quot;pm25&quot;</span>,
-                                <span class="dt">page =</span> page,
-                                <span class="dt">limit =</span> <span class="dv">1000</span>))
-  }</code></pre></div>
+<p>For all endpoints/functions, there a a <code>limit</code> and a <code>page</code> arguments, which indicate, respectively, how many results per page should be shown and which page should be queried. If you don’t enter the parameters by default all results for the query will be retrieved with async requests, but it might take a while nonetheless depending on the total number of results.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aq_measurements</span>(<span class="dt">city =</span> <span class="st">&quot;Delhi&quot;</span>,
+                            <span class="dt">parameter =</span> <span class="st">&quot;pm25&quot;</span>)</code></pre></div>
 <p>If you really need a lot of data, maybe using the API and this package is not the best choice for you. You can look into downloading csv data from OpenAQ website, e.g. <a href="https://openaq.org/#/locations?_k=jk7d09">here</a> or the daily csv output <a href="http://openaq-data.s3.amazonaws.com/index.html">here</a>. Or you might want to contact OpenAQ.</p>
 </div>
 <div id="other-packages-of-interest-for-getting-air-quality-data" class="section level1">
@@ -855,7 +143,7 @@ for (page in <span class="dv">1</span>:(<span class="kw">ceiling</span>(how_many
 <li><p>The <a href="https://github.com/kehraProject/r_rdefra"><code>rdefra</code> package</a>, also part of the rOpenSci project, allows to to interact with the UK AIR pollution database from DEFRA, including historical measures.</p></li>
 <li><p>The <a href="https://github.com/davidcarslaw/openair"><code>openair</code> package</a> gives access to the same data as <code>rdefra</code> but relies on a local and compressed copy of the data on servers at King’s College (UK), periodically updated.</p></li>
 <li><p>The <a href="https://github.com/masalmon/usaqmindia"><code>usaqmindia</code> package</a> provides data from the US air quality monitoring program in India for Delhi, Mumbai, Chennai, Hyderabad and Kolkata from 2013. ## Meta</p></li>
-<li>Please <a href="https://github.com/ropenscilabs/ropenaq/issues">report any issues or bugs</a>.</li>
+<li>Please <a href="https://github.com/ropensci/ropenaq/issues">report any issues or bugs</a>.</li>
 <li>License: GPL</li>
 <li>Get citation information for <code>ropenaq</code> in R doing <code>citation(package = 'ropenaq')</code></li>
 <li><p>Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p></li>
