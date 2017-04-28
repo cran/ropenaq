@@ -1,12 +1,12 @@
-771d62679e4a5faf2c0c382a6210046e *DESCRIPTION
+b477e699ae0016e35961facad37ef093 *DESCRIPTION
 8ab81e6e1449bf9c075aa72ba112f703 *NAMESPACE
-6b966852df80e79481ffd82cac47ccfc *NEWS.md
+1404bc042e197aa9a11463da962c88fe *NEWS.md
 01df3c02c3416e777c0b584546348940 *R/cities.R
 214e2932411f190fa0d5f8149a86b381 *R/countries.R
 e3b7f519fea47e60d9604f9178921285 *R/latest.R
 4610e44260f9b468d5bf6e55f9feb21c *R/locations.R
 68163b828ef4cc877910dc69ad637f4c *R/measurements.R
-62dfe277b496fd80bfa5d22eaa1e6875 *R/utils.R
+de169966926bab7ba0a559afe7486f29 *R/utils.R
 ae0bf3f5c313f9565552e5087c1d6973 *build/vignette.rds
 6ea03f61548c1c35285123978c265486 *inst/doc/Ropenaq-vignette.R
 2dc1ba0854142efc9e471f14a601f33b *inst/doc/Ropenaq-vignette.Rmd
@@ -27,7 +27,7 @@ f13b91c311e811775b47d8d4a75fdfd0 *man/aq_countries.Rd
 416c1a48fc83815893285da6b1f7be77 *man/aq_measurements.Rd
 2d6a383cb463638f0d1d3a6246f4b85f *tests/testthat.R
 f788a14e9046db05d6ae4c9211ce5f23 *tests/testthat/test-async.R
-007fffe20249793ea68376e3d6148513 *tests/testthat/test-buildQueries.R
+084492a39b8ac97b04b458a967607df1 *tests/testthat/test-buildQueries.R
 c9add363c89dfcb9ed5e841ed449436c *tests/testthat/test-cities.R
 f60cd22813284d3e5ff44498b3a7240a *tests/testthat/test-countries.R
 f40f91d345a1598ebf206db5e1faf967 *tests/testthat/test-latest.R

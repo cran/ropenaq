@@ -1,7 +1,7 @@
 Package: ropenaq
 Type: Package
 Title: Accesses Air Quality Data from the Open Data Platform OpenAQ
-Version: 0.1.4
+Version: 0.2.0
 Authors@R: c(person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre")),
              person("Andrew", "MacDonald", role = c("ctb"), comment = "Andrew MacDonald reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/24"),
              person("Andy ", "Teucher", role = c("ctb"), comment = "Andy Teucher reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/24"),
@@ -21,7 +21,7 @@ VignetteBuilder: knitr
 Imports: crul, lubridate, dplyr, jsonlite, tidyr, lazyeval
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2017-04-11 08:40:20 UTC; msalmon
+Packaged: 2017-04-28 09:41:50 UTC; msalmon
 Author: Maëlle Salmon [aut, cre],
   Andrew MacDonald [ctb] (Andrew MacDonald reviewed the package for
     rOpenSci, see https://github.com/ropensci/onboarding/issues/24),
@@ -30,4 +30,4 @@ Author: Maëlle Salmon [aut, cre],
   Mikayla Murphy [ctb]
 Maintainer: Maëlle Salmon <maelle.salmon@yahoo.se>
 Repository: CRAN
-Date/Publication: 2017-04-11 10:15:54 UTC
+Date/Publication: 2017-04-28 12:58:58 UTC
