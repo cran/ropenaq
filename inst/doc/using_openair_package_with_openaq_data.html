@@ -12,7 +12,7 @@
 
 <meta name="author" content="M. Salmon" />
 
-<meta name="date" content="2017-06-08" />
+<meta name="date" content="2017-08-01" />
 
 <title>Using the R package openair</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Using the R package openair</h1>
 <h4 class="author"><em>M. Salmon</em></h4>
-<h4 class="date"><em>2017-06-08</em></h4>
+<h4 class="date"><em>2017-08-01</em></h4>
 
 
 
@@ -83,6 +83,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">measurementsNL &lt;-<span class="st"> </span><span class="kw">aq_measurements</span>(<span class="dt">location=</span><span class="st">&quot;Amsterdam-Einsteinweg&quot;</span>, <span class="dt">parameter=</span><span class="st">&quot;pm25&quot;</span>,
                                        <span class="dt">date_from=</span><span class="st">&quot;2015-09-01&quot;</span>,
                                        <span class="dt">date_to=</span><span class="st">&quot;2015-12-31&quot;</span>)
+<span class="co">#&gt; Warning: package 'bindrcpp' was built under R version 3.3.2</span>
 
 <span class="co"># filter negative values</span>
 <span class="co"># and rename columns for compatibilities with openair</span>
