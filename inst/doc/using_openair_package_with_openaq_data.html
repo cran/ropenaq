@@ -12,7 +12,7 @@
 
 <meta name="author" content="M. Salmon" />
 
-<meta name="date" content="2017-11-20" />
+<meta name="date" content="2018-01-03" />
 
 <title>Using the R package openair</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Using the R package openair</h1>
 <h4 class="author"><em>M. Salmon</em></h4>
-<h4 class="date"><em>2017-11-20</em></h4>
+<h4 class="date"><em>2018-01-03</em></h4>
 
 
 
@@ -102,9 +102,14 @@ measurementsNL &lt;-<span class="st"> </span><span class="kw">as.data.frame</spa
 </div>
 <div id="calendarplot" class="section level1">
 <h1>Calendarplot</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># cool calendar plot</span>
-<span class="kw">calendarPlot</span>(<span class="dt">mydata=</span>measurementsNL, <span class="dt">pollutant =</span> <span class="st">&quot;pm25&quot;</span>,
-             <span class="dt">year =</span> <span class="kw">as.numeric</span>(<span class="kw">format</span>(<span class="kw">Sys.Date</span>(), <span class="st">&quot;%Y&quot;</span>)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># cool calendar plot </span>
+if(<span class="kw">as.numeric</span>(<span class="kw">format</span>(<span class="kw">Sys.Date</span>(), <span class="st">&quot;%m&quot;</span>)) &lt;<span class="st"> </span><span class="dv">2</span>){
+  <span class="kw">calendarPlot</span>(<span class="dt">mydata=</span>measurementsNL, <span class="dt">pollutant =</span> <span class="st">&quot;pm25&quot;</span>,
+             <span class="dt">year =</span> <span class="kw">as.numeric</span>(<span class="kw">format</span>(<span class="kw">Sys.Date</span>(), <span class="st">&quot;%Y&quot;</span>)) -<span class="st"> </span><span class="dv">1</span>)
+}else{
+  <span class="kw">calendarPlot</span>(<span class="dt">mydata=</span>measurementsNL, <span class="dt">pollutant =</span> <span class="st">&quot;pm25&quot;</span>,
+             <span class="dt">year =</span> <span class="kw">as.numeric</span>(<span class="kw">format</span>(<span class="kw">Sys.Date</span>(), <span class="st">&quot;%Y&quot;</span>)))
+}</code></pre></div>
 </div>
 
 
