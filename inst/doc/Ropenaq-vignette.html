@@ -12,7 +12,7 @@
 
 <meta name="author" content="M. Salmon" />
 
-<meta name="date" content="2018-01-03" />
+<meta name="date" content="2018-02-28" />
 
 <title>R package ropenaq</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">R package ropenaq</h1>
 <h4 class="author"><em>M. Salmon</em></h4>
-<h4 class="date"><em>2018-01-03</em></h4>
+<h4 class="date"><em>2018-02-28</em></h4>
 
 
 
@@ -91,18 +91,625 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;ropenaq&quot;</span>)
 countries_table &lt;-<span class="st"> </span><span class="kw">aq_countries</span>()
 <span class="kw">library</span>(<span class="st">&quot;knitr&quot;</span>)
-<span class="kw">kable</span>(countries_table)
-<span class="kw">attr</span>(countries_table, <span class="st">&quot;meta&quot;</span>)
-<span class="kw">attr</span>(countries_table, <span class="st">&quot;timestamp&quot;</span>)</code></pre></div>
+<span class="kw">kable</span>(countries_table)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">name</th>
+<th align="left">code</th>
+<th align="right">cities</th>
+<th align="right">locations</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Andorra</td>
+<td align="left">AD</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">16346</td>
+</tr>
+<tr class="even">
+<td align="left">Argentina</td>
+<td align="left">AR</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">14976</td>
+</tr>
+<tr class="odd">
+<td align="left">Australia</td>
+<td align="left">AU</td>
+<td align="right">18</td>
+<td align="right">99</td>
+<td align="right">3421950</td>
+</tr>
+<tr class="even">
+<td align="left">Austria</td>
+<td align="left">AT</td>
+<td align="right">16</td>
+<td align="right">306</td>
+<td align="right">1521351</td>
+</tr>
+<tr class="odd">
+<td align="left">Bahrain</td>
+<td align="left">BH</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">14724</td>
+</tr>
+<tr class="even">
+<td align="left">Bangladesh</td>
+<td align="left">BD</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">16523</td>
+</tr>
+<tr class="odd">
+<td align="left">Belgium</td>
+<td align="left">BE</td>
+<td align="right">14</td>
+<td align="right">191</td>
+<td align="right">1280070</td>
+</tr>
+<tr class="even">
+<td align="left">Bosnia and Herzegovina</td>
+<td align="left">BA</td>
+<td align="right">8</td>
+<td align="right">17</td>
+<td align="right">715247</td>
+</tr>
+<tr class="odd">
+<td align="left">Brazil</td>
+<td align="left">BR</td>
+<td align="right">72</td>
+<td align="right">119</td>
+<td align="right">2812094</td>
+</tr>
+<tr class="even">
+<td align="left">Canada</td>
+<td align="left">CA</td>
+<td align="right">11</td>
+<td align="right">165</td>
+<td align="right">2174471</td>
+</tr>
+<tr class="odd">
+<td align="left">Chile</td>
+<td align="left">CL</td>
+<td align="right">138</td>
+<td align="right">113</td>
+<td align="right">4337881</td>
+</tr>
+<tr class="even">
+<td align="left">China</td>
+<td align="left">CN</td>
+<td align="right">21</td>
+<td align="right">74</td>
+<td align="right">547807</td>
+</tr>
+<tr class="odd">
+<td align="left">Colombia</td>
+<td align="left">CO</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">15327</td>
+</tr>
+<tr class="even">
+<td align="left">Croatia</td>
+<td align="left">HR</td>
+<td align="right">16</td>
+<td align="right">49</td>
+<td align="right">260470</td>
+</tr>
+<tr class="odd">
+<td align="left">Czech Republic</td>
+<td align="left">CZ</td>
+<td align="right">15</td>
+<td align="right">200</td>
+<td align="right">1344886</td>
+</tr>
+<tr class="even">
+<td align="left">Denmark</td>
+<td align="left">DK</td>
+<td align="right">7</td>
+<td align="right">25</td>
+<td align="right">187282</td>
+</tr>
+<tr class="odd">
+<td align="left">Ethiopia</td>
+<td align="left">ET</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">21427</td>
+</tr>
+<tr class="even">
+<td align="left">Finland</td>
+<td align="left">FI</td>
+<td align="right">35</td>
+<td align="right">107</td>
+<td align="right">589845</td>
+</tr>
+<tr class="odd">
+<td align="left">France</td>
+<td align="left">FR</td>
+<td align="right">134</td>
+<td align="right">1171</td>
+<td align="right">6743082</td>
+</tr>
+<tr class="even">
+<td align="left">Germany</td>
+<td align="left">DE</td>
+<td align="right">36</td>
+<td align="right">1026</td>
+<td align="right">7118364</td>
+</tr>
+<tr class="odd">
+<td align="left">Ghana</td>
+<td align="left">GH</td>
+<td align="right">1</td>
+<td align="right">11</td>
+<td align="right">1595</td>
+</tr>
+<tr class="even">
+<td align="left">Gibraltar</td>
+<td align="left">GI</td>
+<td align="right">2</td>
+<td align="right">6</td>
+<td align="right">36099</td>
+</tr>
+<tr class="odd">
+<td align="left">Hong Kong</td>
+<td align="left">HK</td>
+<td align="right">9</td>
+<td align="right">16</td>
+<td align="right">84882</td>
+</tr>
+<tr class="even">
+<td align="left">Hungary</td>
+<td align="left">HU</td>
+<td align="right">14</td>
+<td align="right">50</td>
+<td align="right">480631</td>
+</tr>
+<tr class="odd">
+<td align="left">India</td>
+<td align="left">IN</td>
+<td align="right">62</td>
+<td align="right">171</td>
+<td align="right">7276092</td>
+</tr>
+<tr class="even">
+<td align="left">Indonesia</td>
+<td align="left">ID</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">37550</td>
+</tr>
+<tr class="odd">
+<td align="left">Ireland</td>
+<td align="left">IE</td>
+<td align="right">11</td>
+<td align="right">26</td>
+<td align="right">90345</td>
+</tr>
+<tr class="even">
+<td align="left">Israel</td>
+<td align="left">IL</td>
+<td align="right">14</td>
+<td align="right">137</td>
+<td align="right">62225518</td>
+</tr>
+<tr class="odd">
+<td align="left">Italy</td>
+<td align="left">IT</td>
+<td align="right">45</td>
+<td align="right">104</td>
+<td align="right">579467</td>
+</tr>
+<tr class="even">
+<td align="left">Kosovo</td>
+<td align="left">XK</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">14826</td>
+</tr>
+<tr class="odd">
+<td align="left">Kuwait</td>
+<td align="left">KW</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">7251</td>
+</tr>
+<tr class="even">
+<td align="left">Latvia</td>
+<td align="left">LV</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">35927</td>
+</tr>
+<tr class="odd">
+<td align="left">Lithuania</td>
+<td align="left">LT</td>
+<td align="right">8</td>
+<td align="right">17</td>
+<td align="right">100796</td>
+</tr>
+<tr class="even">
+<td align="left">Luxembourg</td>
+<td align="left">LU</td>
+<td align="right">3</td>
+<td align="right">7</td>
+<td align="right">73071</td>
+</tr>
+<tr class="odd">
+<td align="left">Macedonia, the Former Yugoslav Republic of</td>
+<td align="left">MK</td>
+<td align="right">16</td>
+<td align="right">30</td>
+<td align="right">344980</td>
+</tr>
+<tr class="even">
+<td align="left">Malta</td>
+<td align="left">MT</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">46226</td>
+</tr>
+<tr class="odd">
+<td align="left">Mexico</td>
+<td align="left">MX</td>
+<td align="right">5</td>
+<td align="right">95</td>
+<td align="right">1826197</td>
+</tr>
+<tr class="even">
+<td align="left">Mongolia</td>
+<td align="left">MN</td>
+<td align="right">25</td>
+<td align="right">40</td>
+<td align="right">2147519</td>
+</tr>
+<tr class="odd">
+<td align="left">Nepal</td>
+<td align="left">NP</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">26318</td>
+</tr>
+<tr class="even">
+<td align="left">Netherlands</td>
+<td align="left">NL</td>
+<td align="right">68</td>
+<td align="right">112</td>
+<td align="right">5195292</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NG</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2541</td>
+</tr>
+<tr class="even">
+<td align="left">Norway</td>
+<td align="left">NO</td>
+<td align="right">32</td>
+<td align="right">70</td>
+<td align="right">1155546</td>
+</tr>
+<tr class="odd">
+<td align="left">Peru</td>
+<td align="left">PE</td>
+<td align="right">1</td>
+<td align="right">19</td>
+<td align="right">437327</td>
+</tr>
+<tr class="even">
+<td align="left">Philippines</td>
+<td align="left">PH</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">958</td>
+</tr>
+<tr class="odd">
+<td align="left">Poland</td>
+<td align="left">PL</td>
+<td align="right">10</td>
+<td align="right">16</td>
+<td align="right">547921</td>
+</tr>
+<tr class="even">
+<td align="left">Portugal</td>
+<td align="left">PT</td>
+<td align="right">15</td>
+<td align="right">64</td>
+<td align="right">197578</td>
+</tr>
+<tr class="odd">
+<td align="left">Russian Federation</td>
+<td align="left">RU</td>
+<td align="right">1</td>
+<td align="right">49</td>
+<td align="right">187117</td>
+</tr>
+<tr class="even">
+<td align="left">Serbia</td>
+<td align="left">RS</td>
+<td align="right">4</td>
+<td align="right">5</td>
+<td align="right">15823</td>
+</tr>
+<tr class="odd">
+<td align="left">Singapore</td>
+<td align="left">SG</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1275</td>
+</tr>
+<tr class="even">
+<td align="left">Slovakia</td>
+<td align="left">SK</td>
+<td align="right">8</td>
+<td align="right">38</td>
+<td align="right">385334</td>
+</tr>
+<tr class="odd">
+<td align="left">Slovenia</td>
+<td align="left">SI</td>
+<td align="right">8</td>
+<td align="right">8</td>
+<td align="right">27183</td>
+</tr>
+<tr class="even">
+<td align="left">South Africa</td>
+<td align="left">ZA</td>
+<td align="right">1</td>
+<td align="right">11</td>
+<td align="right">189963</td>
+</tr>
+<tr class="odd">
+<td align="left">Spain</td>
+<td align="left">ES</td>
+<td align="right">115</td>
+<td align="right">1066</td>
+<td align="right">8242089</td>
+</tr>
+<tr class="even">
+<td align="left">Sri Lanka</td>
+<td align="left">LK</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2687</td>
+</tr>
+<tr class="odd">
+<td align="left">Sweden</td>
+<td align="left">SE</td>
+<td align="right">3</td>
+<td align="right">13</td>
+<td align="right">203211</td>
+</tr>
+<tr class="even">
+<td align="left">Switzerland</td>
+<td align="left">CH</td>
+<td align="right">14</td>
+<td align="right">25</td>
+<td align="right">267841</td>
+</tr>
+<tr class="odd">
+<td align="left">Taiwan, Province of China</td>
+<td align="left">TW</td>
+<td align="right">30</td>
+<td align="right">77</td>
+<td align="right">2938513</td>
+</tr>
+<tr class="even">
+<td align="left">Thailand</td>
+<td align="left">TH</td>
+<td align="right">33</td>
+<td align="right">64</td>
+<td align="right">2700224</td>
+</tr>
+<tr class="odd">
+<td align="left">Turkey</td>
+<td align="left">TR</td>
+<td align="right">40</td>
+<td align="right">142</td>
+<td align="right">3900703</td>
+</tr>
+<tr class="even">
+<td align="left">Uganda</td>
+<td align="left">UG</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">7275</td>
+</tr>
+<tr class="odd">
+<td align="left">United Arab Emirates</td>
+<td align="left">AE</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1121</td>
+</tr>
+<tr class="even">
+<td align="left">United Kingdom</td>
+<td align="left">GB</td>
+<td align="right">112</td>
+<td align="right">162</td>
+<td align="right">5332550</td>
+</tr>
+<tr class="odd">
+<td align="left">United States</td>
+<td align="left">US</td>
+<td align="right">747</td>
+<td align="right">1946</td>
+<td align="right">28129949</td>
+</tr>
+<tr class="even">
+<td align="left">Viet Nam</td>
+<td align="left">VN</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">34345</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attr</span>(countries_table, <span class="st">&quot;meta&quot;</span>)
+<span class="co">#&gt; # A tibble: 1 x 6</span>
+<span class="co">#&gt;   name       license   website                   page limit found</span>
+<span class="co">#&gt;   &lt;fct&gt;      &lt;fct&gt;     &lt;fct&gt;                    &lt;int&gt; &lt;int&gt; &lt;int&gt;</span>
+<span class="co">#&gt; 1 openaq-api CC BY 4.0 https://docs.openaq.org/     1 10000    64</span>
+<span class="kw">attr</span>(countries_table, <span class="st">&quot;timestamp&quot;</span>)
+<span class="co">#&gt; # A tibble: 1 x 1</span>
+<span class="co">#&gt;   queriedAt          </span>
+<span class="co">#&gt;   &lt;dttm&gt;             </span>
+<span class="co">#&gt; 1 2018-02-28 20:39:51</span></code></pre></div>
 </div>
 <div id="the-aq_cities-function" class="section level2">
 <h2>The <code>aq_cities</code> function</h2>
 <p>Using the <code>aq_cities</code> functions one can get all cities for which information is available within the platform. For each city, one gets the number of locations and the count of measures for the city, the URL encoded string, and the country it is in.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cities_table &lt;-<span class="st"> </span><span class="kw">aq_cities</span>()
 <span class="kw">kable</span>(<span class="kw">head</span>(cities_table))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">city</th>
+<th align="left">country</th>
+<th align="right">locations</th>
+<th align="right">count</th>
+<th align="left">cityURL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Escaldes-Engordany</td>
+<td align="left">AD</td>
+<td align="right">2</td>
+<td align="right">16032</td>
+<td align="left">Escaldes-Engordany</td>
+</tr>
+<tr class="even">
+<td align="left">unused</td>
+<td align="left">AD</td>
+<td align="right">1</td>
+<td align="right">314</td>
+<td align="left">unused</td>
+</tr>
+<tr class="odd">
+<td align="left">Abu Dhabi</td>
+<td align="left">AE</td>
+<td align="right">1</td>
+<td align="right">1121</td>
+<td align="left">Abu+Dhabi</td>
+</tr>
+<tr class="even">
+<td align="left">Buenos Aires</td>
+<td align="left">AR</td>
+<td align="right">4</td>
+<td align="right">14976</td>
+<td align="left">Buenos+Aires</td>
+</tr>
+<tr class="odd">
+<td align="left">Austria</td>
+<td align="left">AT</td>
+<td align="right">174</td>
+<td align="right">121987</td>
+<td align="left">Austria</td>
+</tr>
+<tr class="even">
+<td align="left">Amt der Nieder<U+FFFD>sterreichischen Landesregierung</td>
+<td align="left">AT</td>
+<td align="right">39</td>
+<td align="right">322499</td>
+<td align="left">Amt+der+Nieder%EF%BF%BDsterreichischen+Landesregierung</td>
+</tr>
+</tbody>
+</table>
 <p>The optional <code>country</code> argument allows to do this for a given country instead of the whole world.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cities_tableIndia &lt;-<span class="st"> </span><span class="kw">aq_cities</span>(<span class="dt">country=</span><span class="st">&quot;IN&quot;</span>, <span class="dt">limit =</span> <span class="dv">10</span>, <span class="dt">page =</span> <span class="dv">1</span>)
 <span class="kw">kable</span>(cities_tableIndia)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">city</th>
+<th align="left">country</th>
+<th align="right">locations</th>
+<th align="right">count</th>
+<th align="left">cityURL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Delhi</td>
+<td align="left">IN</td>
+<td align="right">35</td>
+<td align="right">1181981</td>
+<td align="left">Delhi</td>
+</tr>
+<tr class="even">
+<td align="left">Rohtak</td>
+<td align="left">IN</td>
+<td align="right">1</td>
+<td align="right">98711</td>
+<td align="left">Rohtak</td>
+</tr>
+<tr class="odd">
+<td align="left">Hyderabad</td>
+<td align="left">IN</td>
+<td align="right">15</td>
+<td align="right">486472</td>
+<td align="left">Hyderabad</td>
+</tr>
+<tr class="even">
+<td align="left">Gurgaon</td>
+<td align="left">IN</td>
+<td align="right">1</td>
+<td align="right">152863</td>
+<td align="left">Gurgaon</td>
+</tr>
+<tr class="odd">
+<td align="left">Jaipur</td>
+<td align="left">IN</td>
+<td align="right">6</td>
+<td align="right">202925</td>
+<td align="left">Jaipur</td>
+</tr>
+<tr class="even">
+<td align="left">Nagpur</td>
+<td align="left">IN</td>
+<td align="right">5</td>
+<td align="right">74415</td>
+<td align="left">Nagpur</td>
+</tr>
+<tr class="odd">
+<td align="left">Ahmedabad</td>
+<td align="left">IN</td>
+<td align="right">2</td>
+<td align="right">62603</td>
+<td align="left">Ahmedabad</td>
+</tr>
+<tr class="even">
+<td align="left">Pali</td>
+<td align="left">IN</td>
+<td align="right">2</td>
+<td align="right">24504</td>
+<td align="left">Pali</td>
+</tr>
+<tr class="odd">
+<td align="left">Kolkata</td>
+<td align="left">IN</td>
+<td align="right">7</td>
+<td align="right">169391</td>
+<td align="left">Kolkata</td>
+</tr>
+<tr class="even">
+<td align="left">Visakhapatnam</td>
+<td align="left">IN</td>
+<td align="right">8</td>
+<td align="right">212254</td>
+<td align="left">Visakhapatnam</td>
+</tr>
+</tbody>
+</table>
 <p>If one inputs a country that is not in the platform (or misspells a code), then an error message is thrown.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#aq_cities(country=&quot;PANEM&quot;)</span></code></pre></div>
 </div>
@@ -112,6 +719,117 @@ countries_table &lt;-<span class="st"> </span><span class="kw">aq_countries</spa
 <p>Here we only look for locations with PM2.5 information in Chennai, India.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">locations_chennai &lt;-<span class="st"> </span><span class="kw">aq_locations</span>(<span class="dt">country =</span> <span class="st">&quot;IN&quot;</span>, <span class="dt">city =</span> <span class="st">&quot;Chennai&quot;</span>, <span class="dt">parameter =</span> <span class="st">&quot;pm25&quot;</span>)
 <span class="kw">kable</span>(locations_chennai)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">location</th>
+<th align="left">city</th>
+<th align="left">country</th>
+<th align="right">count</th>
+<th align="left">sourceNames</th>
+<th align="left">lastUpdated</th>
+<th align="left">firstUpdated</th>
+<th align="left">sourceName</th>
+<th align="right">latitude</th>
+<th align="right">longitude</th>
+<th align="left">pm25</th>
+<th align="left">pm10</th>
+<th align="left">no2</th>
+<th align="left">so2</th>
+<th align="left">o3</th>
+<th align="left">co</th>
+<th align="left">bc</th>
+<th align="left">cityURL</th>
+<th align="left">locationURL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Alandur Bus Depot</td>
+<td align="left">Chennai</td>
+<td align="left">IN</td>
+<td align="right">13224</td>
+<td align="left">CPCB</td>
+<td align="left">1519271100</td>
+<td align="left">1487450700</td>
+<td align="left">CPCB</td>
+<td align="right">12.99711</td>
+<td align="right">80.19151</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Chennai</td>
+<td align="left">Alandur+Bus+Depot</td>
+</tr>
+<tr class="even">
+<td align="left">IIT</td>
+<td align="left">Chennai</td>
+<td align="left">IN</td>
+<td align="right">16204</td>
+<td align="left">CPCB</td>
+<td align="left">1519271100</td>
+<td align="left">1487442600</td>
+<td align="left">CPCB</td>
+<td align="right">12.99251</td>
+<td align="right">80.23745</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Chennai</td>
+<td align="left">IIT</td>
+</tr>
+<tr class="odd">
+<td align="left">Manali</td>
+<td align="left">Chennai</td>
+<td align="left">IN</td>
+<td align="right">19515</td>
+<td align="left">CPCB</td>
+<td align="left">1519271100</td>
+<td align="left">1487452500</td>
+<td align="left">CPCB</td>
+<td align="right">13.16454</td>
+<td align="right">80.26285</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Chennai</td>
+<td align="left">Manali</td>
+</tr>
+<tr class="even">
+<td align="left">US Diplomatic Post: Chennai</td>
+<td align="left">Chennai</td>
+<td align="left">IN</td>
+<td align="right">17531</td>
+<td align="left">StateAir_Chennai</td>
+<td align="left">1519846200</td>
+<td align="left">1449869400</td>
+<td align="left">StateAir_Chennai</td>
+<td align="right">13.08784</td>
+<td align="right">80.27847</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">Chennai</td>
+<td align="left">US+Diplomatic+Post%3A+Chennai</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="getting-measurements" class="section level1">
@@ -122,6 +840,166 @@ countries_table &lt;-<span class="st"> </span><span class="kw">aq_countries</spa
 <p>The <code>aq_measurements</code> function has many arguments for getting a query specific to, say, a given parameter in a given location or for a given circle outside a central point by the use of the <code>latitude</code>, <code>longitude</code> and <code>radius</code> arguments. Below we get the PM2.5 measures for Delhi in India.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results_table &lt;-<span class="st"> </span><span class="kw">aq_measurements</span>(<span class="dt">country =</span> <span class="st">&quot;IN&quot;</span>, <span class="dt">city =</span> <span class="st">&quot;Delhi&quot;</span>, <span class="dt">parameter =</span> <span class="st">&quot;pm25&quot;</span>, <span class="dt">limit =</span> <span class="dv">10</span>, <span class="dt">page =</span> <span class="dv">1</span>)
 <span class="kw">kable</span>(results_table)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">location</th>
+<th align="left">parameter</th>
+<th align="right">value</th>
+<th align="left">unit</th>
+<th align="left">country</th>
+<th align="left">city</th>
+<th align="right">latitude</th>
+<th align="right">longitude</th>
+<th align="left">dateUTC</th>
+<th align="left">dateLocal</th>
+<th align="left">cityURL</th>
+<th align="left">locationURL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">US Diplomatic Post: New Delhi</td>
+<td align="left">pm25</td>
+<td align="right">108</td>
+<td align="left">µg/m³</td>
+<td align="left">IN</td>
+<td align="left">Delhi</td>
+<td align="right">28.63576</td>
+<td align="right">77.22445</td>
+<td align="left">2018-02-28 20:30:00</td>
+<td align="left">2018-03-01 02:00:00</td>
+<td align="left">Delhi</td>
+<td align="left">US+Diplomatic+Post%3A+New+Delhi</td>
+</tr>
+<tr class="even">
+<td align="left">US Diplomatic Post: New Delhi</td>
+<td align="left">pm25</td>
+<td align="right">107</td>
+<td align="left">µg/m³</td>
+<td align="left">IN</td>
+<td align="left">Delhi</td>
+<td align="right">28.63576</td>
+<td align="right">77.22445</td>
+<td align="left">2018-02-28 19:30:00</td>
+<td align="left">2018-03-01 01:00:00</td>
+<td align="left">Delhi</td>
+<td align="left">US+Diplomatic+Post%3A+New+Delhi</td>
+</tr>
+<tr class="odd">
+<td align="left">US Diplomatic Post: New Delhi</td>
+<td align="left">pm25</td>
+<td align="right">108</td>
+<td align="left">µg/m³</td>
+<td align="left">IN</td>
+<td align="left">Delhi</td>
+<td align="right">28.63576</td>
+<td align="right">77.22445</td>
+<td align="left">2018-02-28 18:30:00</td>
+<td align="left">2018-03-01 00:00:00</td>
+<td align="left">Delhi</td>
+<td align="left">US+Diplomatic+Post%3A+New+Delhi</td>
+</tr>
+<tr class="even">
+<td align="left">US Diplomatic Post: New Delhi</td>
+<td align="left">pm25</td>
+<td align="right">102</td>
+<td align="left">µg/m³</td>
+<td align="left">IN</td>
+<td align="left">Delhi</td>
+<td align="right">28.63576</td>
+<td align="right">77.22445</td>
+<td align="left">2018-02-28 17:30:00</td>
+<td align="left">2018-02-28 23:00:00</td>
+<td align="left">Delhi</td>
+<td align="left">US+Diplomatic+Post%3A+New+Delhi</td>
+</tr>
+<tr class="odd">
+<td align="left">US Diplomatic Post: New Delhi</td>
+<td align="left">pm25</td>
+<td align="right">88</td>
+<td align="left">µg/m³</td>
+<td align="left">IN</td>
+<td align="left">Delhi</td>
+<td align="right">28.63576</td>
+<td align="right">77.22445</td>
+<td align="left">2018-02-28 16:30:00</td>
+<td align="left">2018-02-28 22:00:00</td>
+<td align="left">Delhi</td>
+<td align="left">US+Diplomatic+Post%3A+New+Delhi</td>
+</tr>
+<tr class="even">
+<td align="left">US Diplomatic Post: New Delhi</td>
+<td align="left">pm25</td>
+<td align="right">74</td>
+<td align="left">µg/m³</td>
+<td align="left">IN</td>
+<td align="left">Delhi</td>
+<td align="right">28.63576</td>
+<td align="right">77.22445</td>
+<td align="left">2018-02-28 15:30:00</td>
+<td align="left">2018-02-28 21:00:00</td>
+<td align="left">Delhi</td>
+<td align="left">US+Diplomatic+Post%3A+New+Delhi</td>
+</tr>
+<tr class="odd">
+<td align="left">US Diplomatic Post: New Delhi</td>
+<td align="left">pm25</td>
+<td align="right">69</td>
+<td align="left">µg/m³</td>
+<td align="left">IN</td>
+<td align="left">Delhi</td>
+<td align="right">28.63576</td>
+<td align="right">77.22445</td>
+<td align="left">2018-02-28 14:30:00</td>
+<td align="left">2018-02-28 20:00:00</td>
+<td align="left">Delhi</td>
+<td align="left">US+Diplomatic+Post%3A+New+Delhi</td>
+</tr>
+<tr class="even">
+<td align="left">US Diplomatic Post: New Delhi</td>
+<td align="left">pm25</td>
+<td align="right">68</td>
+<td align="left">µg/m³</td>
+<td align="left">IN</td>
+<td align="left">Delhi</td>
+<td align="right">28.63576</td>
+<td align="right">77.22445</td>
+<td align="left">2018-02-28 13:30:00</td>
+<td align="left">2018-02-28 19:00:00</td>
+<td align="left">Delhi</td>
+<td align="left">US+Diplomatic+Post%3A+New+Delhi</td>
+</tr>
+<tr class="odd">
+<td align="left">US Diplomatic Post: New Delhi</td>
+<td align="left">pm25</td>
+<td align="right">62</td>
+<td align="left">µg/m³</td>
+<td align="left">IN</td>
+<td align="left">Delhi</td>
+<td align="right">28.63576</td>
+<td align="right">77.22445</td>
+<td align="left">2018-02-28 12:30:00</td>
+<td align="left">2018-02-28 18:00:00</td>
+<td align="left">Delhi</td>
+<td align="left">US+Diplomatic+Post%3A+New+Delhi</td>
+</tr>
+<tr class="even">
+<td align="left">US Diplomatic Post: New Delhi</td>
+<td align="left">pm25</td>
+<td align="right">75</td>
+<td align="left">µg/m³</td>
+<td align="left">IN</td>
+<td align="left">Delhi</td>
+<td align="right">28.63576</td>
+<td align="right">77.22445</td>
+<td align="left">2018-02-28 11:30:00</td>
+<td align="left">2018-02-28 17:00:00</td>
+<td align="left">Delhi</td>
+<td align="left">US+Diplomatic+Post%3A+New+Delhi</td>
+</tr>
+</tbody>
+</table>
 <p>One could also get all possible parameters in the same table.</p>
 </div>
 <div id="the-aq_latest-function" class="section level2">
@@ -129,6 +1007,131 @@ countries_table &lt;-<span class="st"> </span><span class="kw">aq_countries</spa
 <p>This function gives a table with all newest measures for the locations that are chosen by the arguments. If all arguments are <code>NULL</code>, it gives all the newest measures for all locations. Below are the latest values for Hyderabad at the time this vignette was compiled.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tableLatest &lt;-<span class="st"> </span><span class="kw">aq_latest</span>(<span class="dt">country=</span><span class="st">&quot;IN&quot;</span>, <span class="dt">city=</span><span class="st">&quot;Hyderabad&quot;</span>)
 <span class="kw">kable</span>(<span class="kw">head</span>(tableLatest))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">location</th>
+<th align="left">city</th>
+<th align="left">country</th>
+<th align="right">distance</th>
+<th align="right">latitude</th>
+<th align="right">longitude</th>
+<th align="left">parameter</th>
+<th align="right">value</th>
+<th align="left">lastUpdated</th>
+<th align="left">unit</th>
+<th align="left">sourceName</th>
+<th align="right">averagingPeriod_value</th>
+<th align="left">averagingPeriod_unit</th>
+<th align="left">cityURL</th>
+<th align="left">locationURL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bollaram Industrial Area</td>
+<td align="left">Hyderabad</td>
+<td align="left">IN</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">co</td>
+<td align="right">420.0</td>
+<td align="left">2017-02-17 05:15:00</td>
+<td align="left">µg/m³</td>
+<td align="left">CPCB</td>
+<td align="right">0.25</td>
+<td align="left">hours</td>
+<td align="left">Hyderabad</td>
+<td align="left">Bollaram+Industrial+Area</td>
+</tr>
+<tr class="even">
+<td align="left">Bollaram Industrial Area</td>
+<td align="left">Hyderabad</td>
+<td align="left">IN</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">pm25</td>
+<td align="right">55.0</td>
+<td align="left">2017-02-17 05:15:00</td>
+<td align="left">µg/m³</td>
+<td align="left">CPCB</td>
+<td align="right">0.25</td>
+<td align="left">hours</td>
+<td align="left">Hyderabad</td>
+<td align="left">Bollaram+Industrial+Area</td>
+</tr>
+<tr class="odd">
+<td align="left">Bollaram Industrial Area</td>
+<td align="left">Hyderabad</td>
+<td align="left">IN</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">pm10</td>
+<td align="right">137.0</td>
+<td align="left">2017-02-17 05:15:00</td>
+<td align="left">µg/m³</td>
+<td align="left">CPCB</td>
+<td align="right">0.25</td>
+<td align="left">hours</td>
+<td align="left">Hyderabad</td>
+<td align="left">Bollaram+Industrial+Area</td>
+</tr>
+<tr class="even">
+<td align="left">Bollaram Industrial Area</td>
+<td align="left">Hyderabad</td>
+<td align="left">IN</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">no2</td>
+<td align="right">16.2</td>
+<td align="left">2017-02-17 05:15:00</td>
+<td align="left">µg/m³</td>
+<td align="left">CPCB</td>
+<td align="right">0.25</td>
+<td align="left">hours</td>
+<td align="left">Hyderabad</td>
+<td align="left">Bollaram+Industrial+Area</td>
+</tr>
+<tr class="odd">
+<td align="left">Bollaram Industrial Area</td>
+<td align="left">Hyderabad</td>
+<td align="left">IN</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">so2</td>
+<td align="right">16.8</td>
+<td align="left">2017-02-17 05:15:00</td>
+<td align="left">µg/m³</td>
+<td align="left">CPCB</td>
+<td align="right">0.25</td>
+<td align="left">hours</td>
+<td align="left">Hyderabad</td>
+<td align="left">Bollaram+Industrial+Area</td>
+</tr>
+<tr class="even">
+<td align="left">Bollaram Industrial Area, Hyderabad - TSPCB</td>
+<td align="left">Hyderabad</td>
+<td align="left">IN</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">pm25</td>
+<td align="right">72.0</td>
+<td align="left">2018-02-22 03:15:00</td>
+<td align="left">µg/m³</td>
+<td align="left">CPCB</td>
+<td align="right">0.25</td>
+<td align="left">hours</td>
+<td align="left">Hyderabad</td>
+<td align="left">Bollaram+Industrial+Area%2C+Hyderabad+-+TSPCB</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="paging-and-limit" class="section level1">
