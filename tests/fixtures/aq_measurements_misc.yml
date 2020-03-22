@@ -1,0 +1,165 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.openaq.org/v1/measurements?limit=2&page=1&include_fields=attribution
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.58.0 r-curl/4.3 crul/0.9.1.9992
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json; charset=utf-8
+      transfer-encoding: chunked
+      connection: keep-alive
+      access-control-allow-credentials: 'true'
+      access-control-allow-headers: Authorization, Content-Type, If-None-Match
+      access-control-allow-methods: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+      access-control-allow-origin: '*'
+      access-control-expose-headers: WWW-Authenticate, Server-Authorization
+      access-control-max-age: '86400'
+      cache-control: no-cache
+      content-encoding: gzip
+      date: Sat, 21 Mar 2020 10:21:27 GMT
+      last-modified: Sat, 21 Mar 2020 09:50:03 GMT
+      vary: origin,accept-encoding
+      x-cache: RefreshHit from cloudfront
+      via: 1.1 95a1a2515bcfe82199fde4e864c4e6f1.cloudfront.net (CloudFront)
+      x-amz-cf-pop: CDG3-C2
+      x-amz-cf-id: snU55C-pRw6T0I4rHmI9EJMrBcAmdRwx_PYOUgKmNyb9qbAri8X5OA==
+    body:
+      encoding: ASCII-8BIT
+      file: no
+      string: eyJtZXRhIjp7Im5hbWUiOiJvcGVuYXEtYXBpIiwibGljZW5zZSI6IkNDIEJZIDQuMCIsIndlYnNpdGUiOiJodHRwczovL2RvY3Mub3BlbmFxLm9yZy8iLCJwYWdlIjoxLCJsaW1pdCI6MiwiZm91bmQiOjU0MjI5Njc4MX0sInJlc3VsdHMiOlt7ImxvY2F0aW9uIjoiQ295aGFpcXVlIiwicGFyYW1ldGVyIjoicG0yNSIsImRhdGUiOnsidXRjIjoiMjAyOC0wOC0wNVQyMDowMDowMC4wMDBaIiwibG9jYWwiOiIyMDI4LTA4LTA1VDE2OjAwOjAwLTA0OjAwIn0sInZhbHVlIjo4MSwidW5pdCI6IsK1Zy9twrMiLCJjb29yZGluYXRlcyI6eyJsYXRpdHVkZSI6LTQ1LjU3OTk2NDQ3OTQ4LCJsb25naXR1ZGUiOi03Mi4wNjExMjU5ODc3NjZ9LCJjb3VudHJ5IjoiQ0wiLCJjaXR5IjoiQ295aGFpcXVlIiwiYXR0cmlidXRpb24iOlt7Im5hbWUiOiJTSU5DQSIsInVybCI6Imh0dHA6Ly9zaW5jYS5tbWEuZ29iLmNsLyJ9LHsibmFtZSI6Ik1pbmlzdGVyaW8gZGVsIE1lZGlvIEFtYmllbnRlIn1dfSx7ImxvY2F0aW9uIjoiQ295aGFpcXVlIiwicGFyYW1ldGVyIjoicG0xMCIsImRhdGUiOnsidXRjIjoiMjAyOC0wOC0wNVQxOTowMDowMC4wMDBaIiwibG9jYWwiOiIyMDI4LTA4LTA1VDE1OjAwOjAwLTA0OjAwIn0sInZhbHVlIjozLCJ1bml0IjoiwrVnL23CsyIsImNvb3JkaW5hdGVzIjp7ImxhdGl0dWRlIjotNDUuNTc5OTY0NDc5NDgsImxvbmdpdHVkZSI6LTcyLjA2MTEyNTk4Nzc2Nn0sImNvdW50cnkiOiJDTCIsImNpdHkiOiJDb3loYWlxdWUiLCJhdHRyaWJ1dGlvbiI6W3sibmFtZSI6IlNJTkNBIiwidXJsIjoiaHR0cDovL3NpbmNhLm1tYS5nb2IuY2wvIn0seyJuYW1lIjoiTWluaXN0ZXJpbyBkZWwgTWVkaW8gQW1iaWVudGUifV19XX0=
+  recorded_at: 2020-03-21 10:37:55 GMT
+  recorded_with: vcr/0.4.2.93, webmockr/0.5.1.98
+- request:
+    method: get
+    uri: https://api.openaq.org/v1/measurements?limit=2&page=1&include_fields=sourceName
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.58.0 r-curl/4.3 crul/0.9.1.9992
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json; charset=utf-8
+      transfer-encoding: chunked
+      connection: keep-alive
+      access-control-allow-credentials: 'true'
+      access-control-allow-headers: Authorization, Content-Type, If-None-Match
+      access-control-allow-methods: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+      access-control-allow-origin: '*'
+      access-control-expose-headers: WWW-Authenticate, Server-Authorization
+      access-control-max-age: '86400'
+      cache-control: no-cache
+      content-encoding: gzip
+      date: Sat, 21 Mar 2020 10:37:54 GMT
+      last-modified: Sat, 21 Mar 2020 09:50:03 GMT
+      vary: origin,accept-encoding
+      x-cache: Miss from cloudfront
+      via: 1.1 95a1a2515bcfe82199fde4e864c4e6f1.cloudfront.net (CloudFront)
+      x-amz-cf-pop: CDG3-C2
+      x-amz-cf-id: oJmRucleBkt8_fQwMbh4rUUsu7UehBo4TKBHvgoPM4vRBPQ_iAQVVg==
+    body:
+      encoding: ASCII-8BIT
+      file: no
+      string: eyJtZXRhIjp7Im5hbWUiOiJvcGVuYXEtYXBpIiwibGljZW5zZSI6IkNDIEJZIDQuMCIsIndlYnNpdGUiOiJodHRwczovL2RvY3Mub3BlbmFxLm9yZy8iLCJwYWdlIjoxLCJsaW1pdCI6MiwiZm91bmQiOjU0MjI5Njc4MX0sInJlc3VsdHMiOlt7ImxvY2F0aW9uIjoiQ295aGFpcXVlIiwicGFyYW1ldGVyIjoicG0yNSIsImRhdGUiOnsidXRjIjoiMjAyOC0wOC0wNVQyMDowMDowMC4wMDBaIiwibG9jYWwiOiIyMDI4LTA4LTA1VDE2OjAwOjAwLTA0OjAwIn0sInZhbHVlIjo4MSwidW5pdCI6IsK1Zy9twrMiLCJjb29yZGluYXRlcyI6eyJsYXRpdHVkZSI6LTQ1LjU3OTk2NDQ3OTQ4LCJsb25naXR1ZGUiOi03Mi4wNjExMjU5ODc3NjZ9LCJjb3VudHJ5IjoiQ0wiLCJjaXR5IjoiQ295aGFpcXVlIiwic291cmNlTmFtZSI6IkNoaWxlIC0gU0lOQ0EifSx7ImxvY2F0aW9uIjoiQ295aGFpcXVlIiwicGFyYW1ldGVyIjoicG0xMCIsImRhdGUiOnsidXRjIjoiMjAyOC0wOC0wNVQxOTowMDowMC4wMDBaIiwibG9jYWwiOiIyMDI4LTA4LTA1VDE1OjAwOjAwLTA0OjAwIn0sInZhbHVlIjozLCJ1bml0IjoiwrVnL23CsyIsImNvb3JkaW5hdGVzIjp7ImxhdGl0dWRlIjotNDUuNTc5OTY0NDc5NDgsImxvbmdpdHVkZSI6LTcyLjA2MTEyNTk4Nzc2Nn0sImNvdW50cnkiOiJDTCIsImNpdHkiOiJDb3loYWlxdWUiLCJzb3VyY2VOYW1lIjoiQ2hpbGUgLSBTSU5DQSJ9XX0=
+  recorded_at: 2020-03-21 10:37:55 GMT
+  recorded_with: vcr/0.4.2.93, webmockr/0.5.1.98
+- request:
+    method: get
+    uri: https://api.openaq.org/v1/measurements?limit=2&page=1&include_fields=averagingPeriod
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.58.0 r-curl/4.3 crul/0.9.1.9992
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json; charset=utf-8
+      transfer-encoding: chunked
+      connection: keep-alive
+      access-control-allow-credentials: 'true'
+      access-control-allow-headers: Authorization, Content-Type, If-None-Match
+      access-control-allow-methods: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+      access-control-allow-origin: '*'
+      access-control-expose-headers: WWW-Authenticate, Server-Authorization
+      access-control-max-age: '86400'
+      cache-control: no-cache
+      content-encoding: gzip
+      date: Sat, 21 Mar 2020 10:21:28 GMT
+      last-modified: Sat, 21 Mar 2020 09:50:03 GMT
+      vary: origin,accept-encoding
+      x-cache: RefreshHit from cloudfront
+      via: 1.1 95a1a2515bcfe82199fde4e864c4e6f1.cloudfront.net (CloudFront)
+      x-amz-cf-pop: CDG3-C2
+      x-amz-cf-id: 7DenXV24nRDi1pl4n2v6INxJfCaM46eTAeLLfn3XIcATUPHC6nXWQA==
+    body:
+      encoding: ASCII-8BIT
+      file: no
+      string: eyJtZXRhIjp7Im5hbWUiOiJvcGVuYXEtYXBpIiwibGljZW5zZSI6IkNDIEJZIDQuMCIsIndlYnNpdGUiOiJodHRwczovL2RvY3Mub3BlbmFxLm9yZy8iLCJwYWdlIjoxLCJsaW1pdCI6MiwiZm91bmQiOjU0MjI5Njc4MX0sInJlc3VsdHMiOlt7ImxvY2F0aW9uIjoiQ295aGFpcXVlIiwicGFyYW1ldGVyIjoicG0yNSIsImRhdGUiOnsidXRjIjoiMjAyOC0wOC0wNVQyMDowMDowMC4wMDBaIiwibG9jYWwiOiIyMDI4LTA4LTA1VDE2OjAwOjAwLTA0OjAwIn0sInZhbHVlIjo4MSwidW5pdCI6IsK1Zy9twrMiLCJjb29yZGluYXRlcyI6eyJsYXRpdHVkZSI6LTQ1LjU3OTk2NDQ3OTQ4LCJsb25naXR1ZGUiOi03Mi4wNjExMjU5ODc3NjZ9LCJjb3VudHJ5IjoiQ0wiLCJjaXR5IjoiQ295aGFpcXVlIn0seyJsb2NhdGlvbiI6IkNveWhhaXF1ZSIsInBhcmFtZXRlciI6InBtMTAiLCJkYXRlIjp7InV0YyI6IjIwMjgtMDgtMDVUMTk6MDA6MDAuMDAwWiIsImxvY2FsIjoiMjAyOC0wOC0wNVQxNTowMDowMC0wNDowMCJ9LCJ2YWx1ZSI6MywidW5pdCI6IsK1Zy9twrMiLCJjb29yZGluYXRlcyI6eyJsYXRpdHVkZSI6LTQ1LjU3OTk2NDQ3OTQ4LCJsb25naXR1ZGUiOi03Mi4wNjExMjU5ODc3NjZ9LCJjb3VudHJ5IjoiQ0wiLCJjaXR5IjoiQ295aGFpcXVlIn1dfQ==
+  recorded_at: 2020-03-21 10:37:55 GMT
+  recorded_with: vcr/0.4.2.93, webmockr/0.5.1.98
+- request:
+    method: get
+    uri: https://api.openaq.org/v1/measurements?limit=2&page=1&include_fields=attribution%2CaveragingPeriod
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.58.0 r-curl/4.3 crul/0.9.1.9992
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json; charset=utf-8
+      transfer-encoding: chunked
+      connection: keep-alive
+      access-control-allow-credentials: 'true'
+      access-control-allow-headers: Authorization, Content-Type, If-None-Match
+      access-control-allow-methods: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+      access-control-allow-origin: '*'
+      access-control-expose-headers: WWW-Authenticate, Server-Authorization
+      access-control-max-age: '86400'
+      cache-control: no-cache
+      content-encoding: gzip
+      date: Sat, 21 Mar 2020 10:21:28 GMT
+      last-modified: Sat, 21 Mar 2020 09:50:03 GMT
+      vary: origin,accept-encoding
+      x-cache: RefreshHit from cloudfront
+      via: 1.1 95a1a2515bcfe82199fde4e864c4e6f1.cloudfront.net (CloudFront)
+      x-amz-cf-pop: CDG3-C2
+      x-amz-cf-id: S1tCUBKBM1Y7qSrwXKIfl9WOI8D6R0eGhM_FHIl3bgPiORqxvgsgPQ==
+    body:
+      encoding: ASCII-8BIT
+      file: no
+      string: eyJtZXRhIjp7Im5hbWUiOiJvcGVuYXEtYXBpIiwibGljZW5zZSI6IkNDIEJZIDQuMCIsIndlYnNpdGUiOiJodHRwczovL2RvY3Mub3BlbmFxLm9yZy8iLCJwYWdlIjoxLCJsaW1pdCI6MiwiZm91bmQiOjU0MjI5Njc4MX0sInJlc3VsdHMiOlt7ImxvY2F0aW9uIjoiQ295aGFpcXVlIiwicGFyYW1ldGVyIjoicG0yNSIsImRhdGUiOnsidXRjIjoiMjAyOC0wOC0wNVQyMDowMDowMC4wMDBaIiwibG9jYWwiOiIyMDI4LTA4LTA1VDE2OjAwOjAwLTA0OjAwIn0sInZhbHVlIjo4MSwidW5pdCI6IsK1Zy9twrMiLCJjb29yZGluYXRlcyI6eyJsYXRpdHVkZSI6LTQ1LjU3OTk2NDQ3OTQ4LCJsb25naXR1ZGUiOi03Mi4wNjExMjU5ODc3NjZ9LCJjb3VudHJ5IjoiQ0wiLCJjaXR5IjoiQ295aGFpcXVlIiwiYXR0cmlidXRpb24iOlt7Im5hbWUiOiJTSU5DQSIsInVybCI6Imh0dHA6Ly9zaW5jYS5tbWEuZ29iLmNsLyJ9LHsibmFtZSI6Ik1pbmlzdGVyaW8gZGVsIE1lZGlvIEFtYmllbnRlIn1dfSx7ImxvY2F0aW9uIjoiQ295aGFpcXVlIiwicGFyYW1ldGVyIjoicG0xMCIsImRhdGUiOnsidXRjIjoiMjAyOC0wOC0wNVQxOTowMDowMC4wMDBaIiwibG9jYWwiOiIyMDI4LTA4LTA1VDE1OjAwOjAwLTA0OjAwIn0sInZhbHVlIjozLCJ1bml0IjoiwrVnL23CsyIsImNvb3JkaW5hdGVzIjp7ImxhdGl0dWRlIjotNDUuNTc5OTY0NDc5NDgsImxvbmdpdHVkZSI6LTcyLjA2MTEyNTk4Nzc2Nn0sImNvdW50cnkiOiJDTCIsImNpdHkiOiJDb3loYWlxdWUiLCJhdHRyaWJ1dGlvbiI6W3sibmFtZSI6IlNJTkNBIiwidXJsIjoiaHR0cDovL3NpbmNhLm1tYS5nb2IuY2wvIn0seyJuYW1lIjoiTWluaXN0ZXJpbyBkZWwgTWVkaW8gQW1iaWVudGUifV19XX0=
+  recorded_at: 2020-03-21 10:37:55 GMT
+  recorded_with: vcr/0.4.2.93, webmockr/0.5.1.98

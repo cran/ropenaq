@@ -1,27 +1,24 @@
 #' Function for getting measurements table from the openAQ API
 #'
-#' @importFrom dplyr tbl_df select_ mutate_
-#' @importFrom lazyeval interp
 #' @importFrom lubridate ymd ymd_hms
 #' @importFrom jsonlite fromJSON
-#' @param country Limit results by a certain country -- a two-letters code see countries() for finding code based on name.
-#' @param city Limit results by a certain city.
-#' @param location Limit results by a certain location.
-#' @param parameter Limit to only a certain parameter (valid values are 'pm25', 'pm10', 'so2', 'no2', 'o3', 'co' and 'bc').
-#' If no parameter is given, all parameters are retrieved.
-#' @param value_from Show results above value threshold, useful in combination with \code{parameter}.
-#' @param value_to Show results below value threshold, useful in combination with \code{parameter}.
-#' @param has_geo has_geo Filter out items that have or do not have geographic information.
-#' @param latitude Latitude of the center point (lat, lon) used to get measurements within a certain area.
-#' @param longitude Longitude of the center point (lat, lon) used to get measurements within a certain area.
-#' @param radius Radius (in meters) used to get measurements within a certain area, must be used with latitude and longitude
+#' @template country
+#' @template city
+#' @template location
+#' @template parameter
+#' @param value_from Show results above value threshold, useful in combination with `parameter`.
+#' @param value_to Show results below value threshold, useful in combination with `parameter`.
+#' @template has_geo
+#' @template latitude
+#' @template longitude
+#' @template radius
 #' @param date_from Show results after a certain date. (character year-month-day, ex. '2015-12-20'). Note, since November 2017 the API only provides access to the last three months so if you need more data you need to fetch it via Amazon S3 (https://medium.com/@openaq/changes-to-the-openaq-api-and-how-to-access-the-full-archive-of-data-3324b136da8c), potentially using the aws.s3 package.
 #' @param date_to Show results before a certain date. (character year-month-day, ex. '2015-12-20')
 #' @param attribution Logical, whether to add a column with attribution information
 #' @param averaging_period Logical, whether to add a column with averaging_period information
 #' @param source_name Logical, whether to add a column with source_name information
-#' @param limit Change the number of results returned, max is 10000.
-#' @param page The page of the results to query. This can be useful if e.g. there are 2000 measurements, then first use page=1 and page=2 with limit=100 to get all measurements for your query.
+#' @template limit
+#' @template page
 
 #'
 #' @return A results data.frame (dplyr "tbl_df") with at least 12 columns:
@@ -107,18 +104,17 @@ aq_measurements <- function(country = NULL, city = NULL, location = NULL,# nolin
     # if no results
     if (nrow(tableOfResults) != 0){
 
-
-    tableOfResults <- addCityURL(resTable = tableOfResults)
-    tableOfResults <- addLocationURL(resTable = tableOfResults)
-    tableOfResults <- dplyr::rename_(tableOfResults, .dots=setNames(list("date.utc"), "dateUTC"))
-    tableOfResults <- dplyr::rename_(tableOfResults, .dots=setNames(list("date.local"), "dateLocal"))
-
-    tableOfResults <- tableOfResults %>% mutate_(dateUTC =
-                                                   interp(~ lubridate::
-                                                            ymd_hms(dateUTC)))
-    tableOfResults <- tableOfResults %>% mutate_(dateLocal =
-                                                   interp(~ lubridate::
-                                                            ymd_hms(strptime(dateLocal, "%Y-%m-%dT%H:%M:%S"))))
+    tableOfResults <- tableOfResults %>%
+        addCityURL() %>%
+        addLocationURL() %>%
+        dplyr::rename(dateUTC = .data$date.utc) %>%
+        dplyr::rename(dateLocal = .data$date.local) %>%
+        dplyr::mutate(dateUTC = lubridate::ymd_hms(.data$dateUTC)) %>%
+        dplyr::mutate(
+            dateLocal = lubridate::ymd_hms(
+                strftime(
+                    .data$dateLocal, "%Y-%m-%dT%H:%M:%S"))
+            )
 
     names(tableOfResults) <- gsub("coordinates\\.", "", names(tableOfResults))
 

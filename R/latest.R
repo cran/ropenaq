@@ -3,18 +3,16 @@
 #' @importFrom tidyr unnest
 #' @importFrom lubridate ymd_hms
 #' @importFrom dplyr bind_rows tbl_df "%>%"
-#' @param country Limit results by a certain country -- a two-letters code see countries() for finding code based on name.
-#' @param city Limit results by a certain city.
-#' @param location Limit results by a certain location.
-#' @param parameter  Limit to only a certain parameter (valid values are 'pm25', 'pm10', 'so2', 'no2', 'o3', 'co' and 'bc').
-#' If no parameter is given, all parameters are retrieved.
-#' @param has_geo has_geo Filter out items that have or do not have geographic information.
-#' @param latitude Latitude of the center point (lat, lon) used to get measurements within a certain area.
-#' @param longitude Longitude of the center point (lat, lon) used to get measurements within a certain area.
-#' @param radius Radius (in meters) used to get measurements within a certain area, must be used with latitude and longitude
-#' @param limit Change the number of results returned, max is 10000.
-#' @param page The page of the results to query. This can be useful if e.g. there are 2000 measurements, then first use page=1 and page=2 with limit=100 to get all measurements for your query.
-
+#' @template country
+#' @template city
+#' @template location
+#' @template parameter
+#' @template has_geo
+#' @template latitude
+#' @template longitude
+#' @template radius
+#' @template limit
+#' @template page
 #' @details For queries involving a city or location argument,
 #' the URL-encoded name of the city/location (as in cityURL/locationURL),
 #' not its name, should be used.
@@ -80,17 +78,26 @@ aq_latest <- function(country = NULL, city = NULL, location = NULL,# nolint
     tableOfResults <- output
     # if no results
     if (nrow(tableOfResults) != 0){
-      tableOfResults$row <- 1:nrow(tableOfResults)
-      tableOfResults <- split(tableOfResults, tableOfResults$row)
-      tableOfResults <- lapply(tableOfResults, denest) %>% dplyr::bind_rows()
-      tableOfResults <- dplyr::select_(tableOfResults, quote(- row))
+
+      tableOfResults <- tidyr::unnest(
+        tableOfResults,
+        .data$measurements
+        )
+
+      if("averagingPeriod" %in% names(tableOfResults)) {
+        tableOfResults <- tidyr::unpack(
+          tableOfResults,
+          .data$averagingPeriod,
+          names_sep = "_"
+          )
+
+      }
+
     tableOfResults <- addCityURL(tableOfResults)
     tableOfResults <- addLocationURL(tableOfResults)
 
-    tableOfResults <- functionTime(tableOfResults,
-                                   "lastUpdated")
-
-    names(tableOfResults) <- gsub("coordinates\\.", "", names(tableOfResults))
+    tableOfResults <- functionTime(tableOfResults, "lastUpdated")
+    tableOfResults$value <- as.numeric(tableOfResults$value)
 
     }
     attr(tableOfResults, "meta") <- attr(output, "meta")
@@ -101,25 +108,4 @@ aq_latest <- function(country = NULL, city = NULL, location = NULL,# nolint
 
 unlistaverage <- function(df){
   lapply(df$averagingPeriod, unlist)
-}
-
-# since tidyr::unnest doesn't work on the data.frame with two levels of nestedness
-denest <- function(df){
-  measurements <- df$measurements
-  if("averagingPeriod" %in% names(measurements[[1]])){
-    average <- lapply(measurements, dplyr::select_, "averagingPeriod")
-    measurements <- lapply(measurements, dplyr::select_, quote(- averagingPeriod))
-    average <- lapply(average, unlistaverage) %>%
-      lapply(as.data.frame) %>%
-      dplyr::bind_rows()
-   names(average) <- paste0("averagingPeriod_", names(average))
-
-   measurements <- dplyr::bind_cols(measurements, average)
-   df <- dplyr::select_(df, quote(- measurements))
-   df <- df[rep(1, nrow(measurements)),]
-   dplyr::bind_cols(df, measurements)
-  }else{
-    tidyr::unnest_(df, "measurements")
-  }
-
 }
