@@ -1,7 +1,7 @@
 Type: Package
 Package: ropenaq
 Title: Accesses Air Quality Data from the Open Data Platform OpenAQ
-Version: 0.2.8
+Version: 0.2.9
 Authors@R: 
     c(person(given = "Maëlle",
              family = "Salmon",
@@ -34,7 +34,7 @@ Encoding: UTF-8
 LazyData: TRUE
 RoxygenNote: 7.0.2
 NeedsCompilation: no
-Packaged: 2020-03-21 15:29:40 UTC; maelle
+Packaged: 2020-03-25 14:47:10 UTC; maelle
 Author: Maëlle Salmon [aut, cre],
   Andrew MacDonald [rev] (Andrew MacDonald reviewed the package for
     rOpenSci, see
@@ -44,4 +44,4 @@ Author: Maëlle Salmon [aut, cre],
   Mikayla Murphy [ctb]
 Maintainer: Maëlle Salmon <maelle.salmon@yahoo.se>
 Repository: CRAN
-Date/Publication: 2020-03-22 06:20:02 UTC
+Date/Publication: 2020-03-26 10:10:16 UTC

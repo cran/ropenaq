@@ -1,13 +1,13 @@
-6f80b975089ba42e865040198f22d292 *DESCRIPTION
+2149b187c5d608f3a111946bf01d59f2 *DESCRIPTION
 064d343cf9e00dc5c87b05727a875392 *NAMESPACE
-ff2f3b30fc91289b9bfb54dc077f9b1c *NEWS.md
+1449e3c7c08db23ef6edd2b93d8d60f6 *NEWS.md
 a6f8a217e56e1b0f04dca3b4333fe3d9 *R/cities.R
 741c3a62b1ccdea360772cc2ebd53cee *R/countries.R
 95e014302c4d6e5fd7a2acbeec56a831 *R/latest.R
 bc9d979d7c7a2a86d405e98eecebc9ae *R/locations.R
 d503a4ca729397fbbba0e0104c599ad8 *R/measurements.R
 b4fe12876c37f8a22cde06e9701eecf0 *R/ropenaq-package.R
-274f8ee483307ecc853cbdcc8fb69c3f *R/utils.R
+23e5bd2354fc71850c84d6b69486f17e *R/utils.R
 de4da3319e93271aa68eee61be6922e9 *man/aq_cities.Rd
 1871c00b709a60515c798983ac25ac05 *man/aq_countries.Rd
 b7c8d596500385e4f9da33e3637bc254 *man/aq_latest.Rd
@@ -35,6 +35,6 @@ a8bc3e5ee004b51a579f8e70cb5b71d6 *tests/fixtures/buildQueries_locations_consiste
 a6a5b7d3b9f257f58f44cf611cd13fd4 *tests/testthat/test-aq_countries.R
 51bb74a69a3ee7d236467f2949a63030 *tests/testthat/test-aq_latest.R
 284f98560cc07902d4ba348d7d54e465 *tests/testthat/test-aq_locations.R
-1a313c2e75f731f2a062dc75109e34c4 *tests/testthat/test-aq_measurements.R
+d45575f54675b5ffad42e048b9044d47 *tests/testthat/test-aq_measurements.R
 9f527a036141886b7dcdd3a18ca3a15b *tests/testthat/test-async.R
-870d9bcdc121fe14c2acd7b6cb3ec535 *tests/testthat/test-buildQueries.R
+8062a9d6b0f9039616b9e3173f91387e *tests/testthat/test-buildQueries.R

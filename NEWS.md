@@ -1,3 +1,9 @@
+# ropenaq 0.2.9
+
+* Skip a vcr-enabled test on CRAN because of a (known, under investigation) vcr problem with encoding. https://github.com/ropensci/vcr/issues/158
+
+* Actually fixes the bug due to the max value of page, not only in the docs this time.
+
 # ropenaq 0.2.8
 
 * Bug fixes (page has now a maximum argument; no longer passing an empty param in the query)
