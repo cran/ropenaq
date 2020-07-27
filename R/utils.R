@@ -203,12 +203,23 @@ replace_plus <- function(x){
 #                       check status                       ####
 #                                                          #
 ############################################################
+
+status_url <- function() {
+  "https://api.openaq.org/status"
+}
+
 get_status <- function(){
-  client <- crul::HttpClient$new(url = "https://api.openaq.org/status")
-  status <- client$get()
-  status <- suppressMessages(status$parse())
-  status <- jsonlite::fromJSON(status)
-  return(status$results$healthStatus)
+  client <- crul::HttpClient$new(url = status_url())
+  status <- client$retry("get")
+
+  if (status$status_code >= 400) {
+    return("red")
+  } else {
+    status <- suppressMessages(status$parse(encoding = "UTF-8"))
+    status <- jsonlite::fromJSON(status)
+    return(status$results$healthStatus)
+  }
+
   }
 
 ######################################################################################
@@ -225,28 +236,29 @@ getResults_bypage <- function(urlAQ, argsList){
   client <- crul::HttpClient$new(url = urlAQ)
   argsList <- Filter(Negate(is.null), argsList)
   argsList <- argsList[argsList != ""]
-  res <- client$get(query = argsList)
-  try_number <- 1
-  # rate limit
-  if(res$status_code == 429){
-    message("Too many requests, waiting 5 minutes.")
-    Sys.sleep(60*5+5)
-    res <- client$get(query = argsList)
-  }
-  while(res$status_code >= 400 && try_number < 6) {status <- get_status()
 
-  if(status %in% c("green", "yellow", "unknown", "unavailable")){
-    message(paste0("Server returned nothing, trying again, try number", try_number))
-    Sys.sleep(2^try_number)
-    res <- client$get(query = argsList)
-    try_number <- try_number + 1
-  }else{
-    stop("uh oh, the OpenAQ API seems to be having some issues, try again later")
+  onwait <- function(resp, wait_time) {
+    status <- get_status()
+
+    if (!status %in% c("green", "yellow", "unknown", "unavailable")) {
+      stop("uh oh, the OpenAQ API seems to be having some issues, try again later")
+    }
   }
 
-  }
+  res <- client$retry(
+    verb = "get",
+    query = argsList,
+    pause_base = 1,
+    pause_cap = 60,
+    pause_min = 1,
+    times = 5,
+    terminate_on = NULL,
+    retry_only_on = NULL,
+    onwait = onwait
+  )
+
   if(argsList$limit == 0){
-    contentPage <- suppressMessages(res$parse())
+    contentPage <- suppressMessages(res$parse(encoding = "UTF-8"))
     # parse the data
     output <- jsonlite::fromJSON(contentPage)
     return(output$meta$found)
@@ -271,21 +283,25 @@ getResults_bymorepages <- function(urlAQ, argsList){
   }
   no_pages <- min(100, ceiling(count/limit))
 
+  if(no_pages == 0){
+    return(data.frame())
+  }
+
   if(no_pages == 1){
     return(getResults_bypage(urlAQ, argsList))
-  }else{
-    queries <- lapply(1:no_pages,
-                      add_page,
-                      query = argsList)
-
-    # 10 urls by request
-    requests <- lapply(queries, create_request,
-                       urlAQ = urlAQ)
-    requests <- split(requests, ceiling(seq_along(requests)/10))
-
-    res_list <- lapply(requests, get_res)
-    bind_keeping_attr(res_list)
   }
+  queries <- lapply(1:no_pages,
+                    add_page,
+                    query = argsList)
+
+  # 10 urls by request
+  requests <- lapply(queries, create_request,
+                     urlAQ = urlAQ)
+  requests <- split(requests, ceiling(seq_along(requests)/10))
+
+  res_list <- lapply(requests, get_res)
+  bind_keeping_attr(res_list)
+
 }
 
 ######################################################################################
@@ -367,7 +383,7 @@ add_page <- function(page, query){
 }
 
 treat_res <- function(res){
-  contentPage <- suppressMessages(res$parse())
+  contentPage <- suppressMessages(res$parse(encoding = "UTF-8"))
   # parse the data
   output <- jsonlite::fromJSON(contentPage)
 
@@ -376,13 +392,10 @@ treat_res <- function(res){
   averagingPeriod <- output$results$averagingPeriod
 
   if(!is.null(date)){
-
-    date <- dplyr::rename(
-      date,
-      date.utc = .data$utc,
-      date.local = .data$local
-      )
-
+    date <- dplyr::rename(date, date.utc = .data$utc)
+    if (!is.null(date[["local"]])) {
+      date <- dplyr::rename(date, date.local = .data$local)
+    }
   }
   if(!is.null(averagingPeriod)){
 
@@ -408,14 +421,14 @@ treat_res <- function(res){
   results <- dplyr::bind_cols(results, date)
   results <- dplyr::bind_cols(results, averagingPeriod)
 
-  results <- dplyr::tbl_df(results)
+  results <- dplyr::as_tibble(results)
 
 
   # get the meta
-  meta <- dplyr::tbl_df(
+  meta <- dplyr::as_tibble(
     as.data.frame(output$meta))
   #get the time stamps
-  timestamp <- dplyr::tbl_df(data.frame(
+  timestamp <- dplyr::as_tibble(data.frame(
     queriedAt = func_date_headers(res$response_headers$date)))
 
   attr(results, "meta") <- meta

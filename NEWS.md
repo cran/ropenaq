@@ -1,3 +1,11 @@
+# ropenaq 0.2.10
+
+# ropenaq 0.2.10
+
+* Fix code using dplyr (@hadley, #57)
+
+* Fix tests that used class() == .
+
 # ropenaq 0.2.9
 
 * Skip a vcr-enabled test on CRAN because of a (known, under investigation) vcr problem with encoding. https://github.com/ropensci/vcr/issues/158
